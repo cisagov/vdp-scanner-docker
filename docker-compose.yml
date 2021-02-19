@@ -14,13 +14,6 @@ services:
     image: cisagov/vdp-scanner
     init: true
     restart: "no"
-    environment:
-      - ECHO_MESSAGE=Hello World from docker-compose!
-    ports:
-      - target: "8080"
-        published: "8080"
-        protocol: tcp
-        mode: host
 
   vdp-scanner-version:
     # Run the container to collect version information

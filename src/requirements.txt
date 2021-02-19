@@ -1,0 +1,2 @@
+docopt
+https://github.com/cisagov/hash-http-content/archive/v0.0.1.tar.gz
