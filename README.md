@@ -6,9 +6,9 @@
 
 ## Docker Image ##
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/cisagov/example)](https://hub.docker.com/r/cisagov/example)
-[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/cisagov/example)](https://hub.docker.com/r/cisagov/example)
-[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/vdp-scanner-docker/tags)
+[![Docker Pulls](https://img.shields.io/docker/pulls/cisagov/vdp-scanner-docker)](https://hub.docker.com/r/cisagov/vdp-scanner)
+[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/cisagov/vdp-scanner)](https://hub.docker.com/r/cisagov/vdp-scanner)
+[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/vdp-scanner/tags)
 
 This is a docker skeleton project that can be used to quickly get a
 new [cisagov](https://github.com/cisagov) GitHub docker project
@@ -21,11 +21,11 @@ appropriate for docker containers and the major languages that we use.
 
 ### Install ###
 
-Pull `cisagov/example` from the Docker repository:
+Pull `cisagov/vdp-scanner` from the Docker repository:
 
-    docker pull cisagov/example
+    docker pull cisagov/vdp-scanner
 
-Or build `cisagov/example` from source:
+Or build `cisagov/vdp-scanner` from source:
 
     git clone https://github.com/cisagov/vdp-scanner-docker.git
     cd vdp-scanner-docker
@@ -33,40 +33,7 @@ Or build `cisagov/example` from source:
 
 ### Run ###
 
-    docker-compose run --rm example
-
-## Ports ##
-
-This container exposes the following ports:
-
-| Port  | Protocol | Service  |
-|-------|----------|----------|
-| 8080  | TCP      | http     |
-
-## Environment Variables ##
-
-| Variable      | Default Value                 | Purpose      |
-|---------------|-------------------------------|--------------|
-| ECHO_MESSAGE  | `Hello World from Dockerfile` | Text to echo |
-
-## Secrets ##
-
-| Filename      | Purpose              |
-|---------------|----------------------|
-| quote.txt     | Secret text to echo  |
-
-## Volumes ##
-
-| Mount point | Purpose        |
-|-------------|----------------|
-| /var/log    | logging output |
-
-## New Repositories from a Skeleton ##
-
-Please see our [Project Setup guide](https://github.com/cisagov/development-guide/tree/develop/project_setup)
-for step-by-step instructions on how to start a new repository from
-a skeleton. This will save you time and effort when configuring a
-new repository!
+    docker-compose run --rm vdp-scanner
 
 ## Contributing ##
 

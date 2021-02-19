@@ -3,19 +3,15 @@ version: "3.7"
 
 # This docker-compose file is used to build and test the container
 
-secrets:
-  quote_txt:
-    file: ./src/secrets/quote.txt
-
 services:
-  example:
+  vdp-scanner:
     # Run the container normally
     build:
       # VERSION must be specified on the command line:
       # e.g., --build-arg VERSION=0.0.1
       context: .
       dockerfile: Dockerfile
-    image: cisagov/example
+    image: cisagov/vdp-scanner
     init: true
     restart: "no"
     environment:
@@ -25,13 +21,10 @@ services:
         published: "8080"
         protocol: tcp
         mode: host
-    secrets:
-      - source: quote_txt
-        target: quote.txt
 
-  example-version:
+  vdp-scanner-version:
     # Run the container to collect version information
-    image: cisagov/example
+    image: cisagov/vdp-scanner
     init: true
     restart: "no"
     command: --version

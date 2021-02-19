@@ -1,5 +1,5 @@
 #!/usr/bin/env pytest -vs
-"""Tests for example container."""
+"""Tests for vdp-scanner container."""
 
 # Standard Python Libraries
 import os
