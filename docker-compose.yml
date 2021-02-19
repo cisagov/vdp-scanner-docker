@@ -16,6 +16,9 @@ services:
     image: cisagov/vdp-scanner
     init: true
     restart: "no"
+    user: "${UID}:${GID}"
+    volumes:
+      - .:/home/cisa/host_mount
 
   vdp-scanner-version:
     # Run the container to collect version information

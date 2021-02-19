@@ -1,4 +1,4 @@
-# vdp-scanner-docker 💀🐳 #
+# vdp-scanner-docker 🔍📄 #
 
 [![GitHub Build Status](https://github.com/cisagov/vdp-scanner-docker/workflows/build/badge.svg)](https://github.com/cisagov/vdp-scanner-docker/actions)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/vdp-scanner-docker.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/vdp-scanner-docker/alerts/)
@@ -23,17 +23,35 @@ appropriate for docker containers and the major languages that we use.
 
 Pull `cisagov/vdp-scanner` from the Docker repository:
 
-    docker pull cisagov/vdp-scanner
+```console
+docker pull cisagov/vdp-scanner
+```
 
 Or build `cisagov/vdp-scanner` from source:
 
-    git clone https://github.com/cisagov/vdp-scanner-docker.git
-    cd vdp-scanner-docker
-    docker-compose build --build-arg VERSION=0.0.1
+```console
+git clone https://github.com/cisagov/vdp-scanner-docker.git
+cd vdp-scanner-docker
+docker-compose build
+```
 
 ### Run ###
 
-    docker-compose run --rm vdp-scanner
+This Docker image needs a mount to get the output from the script to the host.
+Due to how Docker works, we need to specify the local User and Group IDs to
+prevent errors or access conflicts with the generated files.
+
+Using `docker run`
+
+```console
+docker-compose run --user $(id -u):$(id -g) --volume ".:/home/cisa/host_mount" --rm vdp-scanner
+```
+
+or using `docker-compose`
+
+```console
+UID=$(id -u) GID=$(id -g) docker-compose up
+```
 
 ## Contributing ##
 
