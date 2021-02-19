@@ -7,8 +7,10 @@ services:
   vdp-scanner:
     # Run the container normally
     build:
-      # VERSION must be specified on the command line:
-      # e.g., --build-arg VERSION=0.0.1
+      # SERVERLESS_CHROME_VERSION and SERVERLESS_CHROME_LOCAL can be specified
+      # on the command line to modify what is installed and where:
+      # --build-arg SERVERLESS_CHROME_VERSION=v1.0.0-56
+      # --build-arg SERVERLESS_CHROME_LOCAL=/opt/serverless-chrome
       context: .
       dockerfile: Dockerfile
     image: cisagov/vdp-scanner
