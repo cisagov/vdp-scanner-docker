@@ -37,20 +37,20 @@ docker-compose build
 
 ### Run ###
 
-This Docker image needs a mount to get the output from the script to the host.
-Due to how Docker works, we need to specify the local User and Group IDs to
-prevent errors or access conflicts with the generated files.
+This Docker image needs a bind mount to get the output from the script to the
+host.
 
 Using `docker run`
 
 ```console
-docker-compose run --user $(id -u):$(id -g) --volume ".:/home/cisa/host_mount" --rm vdp-scanner
+docker run --mount type=bind,source=$(pwd),target=/task/host_mount --rm cisagov/vdp-scanner
 ```
 
-or using `docker-compose`
+or if you have cloned the repository, you can use the included
+`docker-compose.yml`
 
 ```console
-UID=$(id -u) GID=$(id -g) docker-compose up
+docker-compose up
 ```
 
 ## Contributing ##

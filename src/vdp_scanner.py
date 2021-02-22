@@ -10,8 +10,9 @@ Arguments:
 Options:
     -h, --help                   Show this help message.
     -v, --version                Show script version.
+    -d, --debug                  Enable debugging output.
     -a, --agency-csv=AGENCY_CSV  Filename to use for Agency results.
-    -d, --domain-csv=DOMAIN_CSV  Filename to use for Domain results.
+    -t, --domain-csv=DOMAIN_CSV  Filename to use for Domain (TLD) results.
     -p, --path-to-chrome=PATH    Path to the serverless-chrome binary being used
                                  [default: /usr/local/bin/serverless-chrome]
 """
@@ -242,12 +243,13 @@ def get_remote_csv() -> List[Dict[str, str]]:
 
 def main():
     """Scan hosts with the hash-http-content package and output results."""
-    logging.basicConfig(
-        format="%(asctime)-15s %(levelname)s %(message)s", level=logging.INFO
-    )
-
     __version__: str = get_version("version.txt")
     args: Dict[str, Any] = docopt.docopt(__doc__, version=__version__)
+
+    log_level = logging.DEBUG if args["--debug"] else logging.INFO
+    logging.basicConfig(
+        format="%(asctime)-15s %(levelname)s %(message)s", level=log_level
+    )
 
     # If we make a call to UrlHasher.hash_url() with verify=False, it will output
     # a warning. Since this is a fallback mechanism, we can squelch these warnings.
