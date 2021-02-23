@@ -50,6 +50,10 @@ class DomainResult(NamedTuple):
 class VdpScanner:
     """Class to handle scanning and outputting the results of any scans."""
 
+    # Value that represents a missing security contact in a GSA formatted domain
+    # list CSV.
+    MISSING_SECURITY_CONTACT = "(blank)"
+
     agency_csv_header = [
         "Agency",
         "Total Domains",
@@ -165,7 +169,10 @@ class VdpScanner:
 
         self.agency_results[result.agency]["Total Domains"] += 1
 
-        if result.security_contact and result.security_contact != "(blank)":
+        if (
+            result.security_contact
+            and result.security_contact != self.MISSING_SECURITY_CONTACT
+        ):
             self.agency_results[result.agency][
                 "Domains with Security Contact Listed"
             ] += 1
