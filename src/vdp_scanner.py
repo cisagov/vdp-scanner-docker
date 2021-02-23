@@ -54,6 +54,7 @@ class VdpScanner:
     # list CSV.
     MISSING_SECURITY_CONTACT = "(blank)"
 
+    # Header for the Agency level results CSV.
     agency_csv_header = [
         "Agency",
         "Total Domains",
@@ -63,6 +64,7 @@ class VdpScanner:
         "Domains with Published VDP",
     ]
 
+    # Header for the domain level results CSV.
     domain_csv_header = [
         "Domain",
         "Agency",
