@@ -16,7 +16,6 @@ services:
     image: cisagov/vdp-scanner
     init: true
     restart: "no"
-    user: "${UID}:${GID}"
     volumes:
       - .:/task/host_mount
 
