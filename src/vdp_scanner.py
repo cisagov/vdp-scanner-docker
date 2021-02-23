@@ -281,17 +281,17 @@ def main():
     if args["--domain-csv"]:
         scanner.domain_csv = args["--domain-csv"]
 
-    current_federal: List[Dict[str, str]]
+    domains_to_scan: List[Dict[str, str]]
 
     if args["local"]:
-        current_federal = get_local_csv(path_join("host_mount", args["FILE"]))
+        domains_to_scan = get_local_csv(path_join("host_mount", args["FILE"]))
 
     if args["github"]:
-        current_federal = get_remote_csv()
+        domains_to_scan = get_remote_csv()
 
-    total_domains = len(current_federal)
+    total_domains = len(domains_to_scan)
     for i, domain_info in enumerate(
-        sorted(current_federal, key=lambda d: d["Domain Name"]), start=1
+        sorted(domains_to_scan, key=lambda d: d["Domain Name"]), start=1
     ):
         logging.info(
             "Processing '%s' (%d/%d)...", domain_info["Domain Name"], i, total_domains
