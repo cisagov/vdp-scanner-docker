@@ -106,7 +106,9 @@ class VdpScanner:
             result = self._hasher.hash_url(urlunparse(url))
         # If there is a TLS issue, try running it without verifying
         except requests.exceptions.SSLError:
-            logging.warning("Falling back to HTTPS without TLS verification for '%s'", domain)
+            logging.warning(
+                "Falling back to HTTPS without TLS verification for '%s'", domain
+            )
             try:
                 # Fallback to unverified TLS
                 result = self._hasher.hash_url(urlunparse(url), verify=False)
