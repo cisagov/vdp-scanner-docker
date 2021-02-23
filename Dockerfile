@@ -27,6 +27,8 @@ COPY src/Pipfile.lock Pipfile.lock
 # PIPENV_VENV_IN_PROJECT=1 directs pipenv to use the current directory for venvs
 RUN PIPENV_VENV_IN_PROJECT=1 pipenv sync
 
+# We only need pipenv to set up the environment, so we remove it from the venv
+# as a last step.
 RUN python -m pip uninstall --yes pipenv
 
 FROM python:${PY_VERSION}-slim AS build-stage
