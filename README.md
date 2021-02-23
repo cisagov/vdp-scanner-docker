@@ -10,12 +10,11 @@
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/cisagov/vdp-scanner)](https://hub.docker.com/r/cisagov/vdp-scanner)
 [![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/vdp-scanner/tags)
 
-This is a docker skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) GitHub docker project
-started.  This skeleton project contains [licensing
-information](LICENSE), as well as [pre-commit hooks](https://pre-commit.com)
-and [GitHub Actions](https://github.com/features/actions) configurations
-appropriate for docker containers and the major languages that we use.
+This is a Docker project to scan either the
+[GSA current Federal .gov domain list](https://github.com/GSA/data/blob/master/dotgov-domains/current-federal.csv)
+, or a given CSV in the same format, with the
+[cisagov/hash-http-content](https://github.com/cisagov/hash-http-content)
+Python library. Then it will output CSVs with Agency and domain level results.
 
 ## Usage ##
 
