@@ -1,4 +1,4 @@
-"""Check current federal DotGov domains for a Vulnerability Disclosure Policy.
+"""Check current federal DotGov domains for a Vulnerability Disclosure Policy (VDP).
 
 Usage:
     vdp_scanner.py [options] local FILE
@@ -100,7 +100,7 @@ class VdpScanner:
             result = self._hasher.hash_url(urlunparse(url))
         # If there is a TLS issue, try running it without verifying
         except requests.exceptions.SSLError:
-            logging.warning("Trying '%s' without TLS verification", domain)
+            logging.warning("Falling back to HTTPS without TLS verification for '%s'", domain)
             try:
                 # Fallback to unverified TLS
                 result = self._hasher.hash_url(urlunparse(url), verify=False)
