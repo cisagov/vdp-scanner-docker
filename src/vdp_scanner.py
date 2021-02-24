@@ -11,8 +11,8 @@ Options:
     -h, --help                   Show this help message.
     -v, --version                Show script version.
     -d, --debug                  Enable debugging output.
-    -a, --agency-csv=AGENCY_CSV  Filename to use for Agency results.
-    -t, --domain-csv=DOMAIN_CSV  Filename to use for Domain (TLD) results.
+    -a, --agency-csv=AGENCY_CSV  Filename to use for agency results.
+    -t, --domain-csv=DOMAIN_CSV  Filename to use for domain (TLD) results.
     -p, --path-to-chrome=PATH    Path to the serverless-chrome binary being used
                                  [default: /usr/local/bin/serverless-chrome]
 """
@@ -54,7 +54,7 @@ class VdpScanner:
     # list CSV.
     MISSING_SECURITY_CONTACT = "(blank)"
 
-    # Header for the Agency level results CSV.
+    # Header for the agency level results CSV.
     agency_csv_header = [
         "Agency",
         "Total Domains",

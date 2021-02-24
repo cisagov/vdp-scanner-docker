@@ -14,7 +14,7 @@ This is a Docker project to scan either the
 [GSA current Federal .gov domain list](https://github.com/GSA/data/blob/master/dotgov-domains/current-federal.csv)
 , or a given CSV in the same format, with the
 [cisagov/hash-http-content](https://github.com/cisagov/hash-http-content)
-Python library. Then it will output CSVs with Agency and domain level results.
+Python library. Then it will output CSVs with agency and domain level results.
 
 ## Usage ##
 
