@@ -1,12 +1,17 @@
 ARG PY_VERSION=3.9
 
-FROM python:${PY_VERSION}-slim AS compile-stage
+FROM python:${PY_VERSION} AS compile-stage
 
 # For a list of pre-defined annotation keys and value types see:
 # https://github.com/opencontainers/image-spec/blob/master/annotations.md
 # Note: Additional labels are added by the build workflow.
 LABEL org.opencontainers.image.authors="nicholas.mcdonnell@cisa.dhs.gov"
 LABEL org.opencontainers.image.vendor="Cyber and Infrastructure Security Agency"
+
+RUN apt-get update \
+  && apt-get install -y --allow-downgrades --no-install-recommends \
+    libxml2-dev=2.9.4+dfsg1-7+deb10u1 \
+    libxslt1-dev=1.1.32-2.2~deb10u1
 
 ENV PY_VENV=/.venv
 
@@ -42,6 +47,8 @@ RUN apt-get update \
     chromium-common=88.0.4324.182-1~deb10u1 \
     curl=7.64.0-4+deb10u2 \
     libnss3=2:3.42.1-1+deb10u3 \
+    libxml2-dev=2.9.4+dfsg1-7+deb10u1 \
+    libxslt1-dev=1.1.32-2.2~deb10u1 \
     openssl=1.1.1d-0+deb10u6 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
