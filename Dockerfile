@@ -40,9 +40,9 @@ RUN apt-get update \
   && apt-get install -y --allow-downgrades --no-install-recommends \
     ca-certificates=20200601~deb10u2 \
     chromium-common=88.0.4324.182-1~deb10u1 \
-    curl=7.64.0-4+deb10u1 \
+    curl=7.64.0-4+deb10u2 \
     libnss3=2:3.42.1-1+deb10u3 \
-    openssl=1.1.1d-0+deb10u5 \
+    openssl=1.1.1d-0+deb10u6 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
