@@ -1,72 +1,56 @@
-# skeleton-docker 💀🐳 #
+# vdp-scanner-docker 🔍📄 #
 
-[![GitHub Build Status](https://github.com/cisagov/skeleton-docker/workflows/build/badge.svg)](https://github.com/cisagov/skeleton-docker/actions)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/skeleton-docker.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/skeleton-docker/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/skeleton-docker.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/skeleton-docker/context:python)
+[![GitHub Build Status](https://github.com/cisagov/vdp-scanner-docker/workflows/build/badge.svg)](https://github.com/cisagov/vdp-scanner-docker/actions)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/vdp-scanner-docker.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/vdp-scanner-docker/alerts/)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/vdp-scanner-docker.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/vdp-scanner-docker/context:python)
 
 ## Docker Image ##
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/cisagov/example)](https://hub.docker.com/r/cisagov/example)
-[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/cisagov/example)](https://hub.docker.com/r/cisagov/example)
-[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/skeleton-docker/tags)
+[![Docker Pulls](https://img.shields.io/docker/pulls/cisagov/vdp-scanner-docker)](https://hub.docker.com/r/cisagov/vdp-scanner)
+[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/cisagov/vdp-scanner)](https://hub.docker.com/r/cisagov/vdp-scanner)
+[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/vdp-scanner/tags)
 
-This is a docker skeleton project that can be used to quickly get a
-new [cisagov](https://github.com/cisagov) GitHub docker project
-started.  This skeleton project contains [licensing
-information](LICENSE), as well as [pre-commit hooks](https://pre-commit.com)
-and [GitHub Actions](https://github.com/features/actions) configurations
-appropriate for docker containers and the major languages that we use.
+This is a Docker project to scan either the
+[GSA current Federal .gov domain list](https://github.com/GSA/data/blob/master/dotgov-domains/current-federal.csv)
+or a given CSV in the same format with the
+[cisagov/hash-http-content](https://github.com/cisagov/hash-http-content)
+Python library. Then it will output CSVs with agency and domain level results.
 
 ## Usage ##
 
 ### Install ###
 
-Pull `cisagov/example` from the Docker repository:
+Pull `cisagov/vdp-scanner` from the Docker repository:
 
-    docker pull cisagov/example
+```console
+docker pull cisagov/vdp-scanner
+```
 
-Or build `cisagov/example` from source:
+Or build `cisagov/vdp-scanner` from source:
 
-    git clone https://github.com/cisagov/skeleton-docker.git
-    cd skeleton-docker
-    docker-compose build --build-arg VERSION=0.0.1
+```console
+git clone https://github.com/cisagov/vdp-scanner-docker.git
+cd vdp-scanner-docker
+docker-compose build
+```
 
 ### Run ###
 
-    docker-compose run --rm example
+This Docker image needs a bind mount to get the output from the script to the
+host.
 
-## Ports ##
+Using `docker run`
 
-This container exposes the following ports:
+```console
+docker run --mount type=bind,source=$(pwd),target=/task/host_mount --rm cisagov/vdp-scanner
+```
 
-| Port  | Protocol | Service  |
-|-------|----------|----------|
-| 8080  | TCP      | http     |
+or if you have cloned the repository, you can use the included
+`docker-compose.yml`
 
-## Environment Variables ##
-
-| Variable      | Default Value                 | Purpose      |
-|---------------|-------------------------------|--------------|
-| ECHO_MESSAGE  | `Hello World from Dockerfile` | Text to echo |
-
-## Secrets ##
-
-| Filename      | Purpose              |
-|---------------|----------------------|
-| quote.txt     | Secret text to echo  |
-
-## Volumes ##
-
-| Mount point | Purpose        |
-|-------------|----------------|
-| /var/log    | logging output |
-
-## New Repositories from a Skeleton ##
-
-Please see our [Project Setup guide](https://github.com/cisagov/development-guide/tree/develop/project_setup)
-for step-by-step instructions on how to start a new repository from
-a skeleton. This will save you time and effort when configuring a
-new repository!
+```console
+docker-compose up
+```
 
 ## Contributing ##
 
