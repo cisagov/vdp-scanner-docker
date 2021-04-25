@@ -243,7 +243,7 @@ def get_local_csv(file: str) -> List[Dict[str, str]]:
 def get_remote_csv() -> List[Dict[str, str]]:
     """Load domains from the CSV at the given URL."""
     resp = requests.get(
-        "https://raw.githubusercontent.com/GSA/data/master/dotgov-domains/current-federal.csv"
+        "https://raw.githubusercontent.com/cisagov/dotgov-data/main/current-federal.csv"
     )
     if resp.status_code != 200:
         return []
