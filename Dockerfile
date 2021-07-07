@@ -6,7 +6,7 @@ FROM python:${PY_VERSION} AS compile-stage
 # https://github.com/opencontainers/image-spec/blob/master/annotations.md
 # Note: Additional labels are added by the build workflow.
 LABEL org.opencontainers.image.authors="nicholas.mcdonnell@cisa.dhs.gov"
-LABEL org.opencontainers.image.vendor="Cyber and Infrastructure Security Agency"
+LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
 
 RUN apt-get update \
   && apt-get install -y --allow-downgrades --no-install-recommends \
