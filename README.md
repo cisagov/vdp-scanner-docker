@@ -89,9 +89,9 @@ a version tag (e.g. `:0.0.2`).
 
 | Image:tag | Description |
 |-----------|-------------|
-|`cisagov/vdp-scanner:1.2.3`| An exact release version. |
-|`cisagov/vdp-scanner:1.2`| The most recent release matching the major and minor version numbers. |
-|`cisagov/vdp-scanner:1`| The most recent release matching the major version number. |
+|`cisagov/vdp-scanner:0.0.2`| An exact release version. |
+|`cisagov/vdp-scanner:0.0`| The most recent release matching the major and minor version numbers. |
+|`cisagov/vdp-scanner:0`| The most recent release matching the major version number. |
 |`cisagov/vdp-scanner:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
 |`cisagov/vdp-scanner:nightly` | A nightly build of the `develop` branch of this repository. |
 |`cisagov/vdp-scanner:latest`| The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
