@@ -10,7 +10,7 @@ LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security
 
 RUN apt-get update \
   && apt-get install -y --allow-downgrades --no-install-recommends \
-    libxml2-dev=2.9.4+dfsg1-7+deb10u1 \
+    libxml2-dev=2.9.4+dfsg1-7+deb10u2 \
     libxslt1-dev=1.1.32-2.2~deb10u1
 
 ENV PY_VENV=/.venv
@@ -21,9 +21,9 @@ ENV PATH="${PY_VENV}/bin:$PATH"
 
 # Install core Python dependencies
 RUN python -m pip install --no-cache-dir \
-  pip==21.0.1 \
-  pipenv==2020.11.15 \
-  setuptools==53.0.0 \
+  pip==21.1.3 \
+  pipenv==2021.5.29 \
+  setuptools==57.4.0 \
   wheel==0.36.2
 
 # Install vdp_scanner.py requirements
