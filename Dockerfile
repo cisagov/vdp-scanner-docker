@@ -1,4 +1,4 @@
-ARG PY_VERSION=3.9
+ARG PY_VERSION=3.9.6
 
 FROM python:${PY_VERSION} AS compile-stage
 
