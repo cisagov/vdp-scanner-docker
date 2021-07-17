@@ -123,6 +123,9 @@ class VdpScanner:
                 # If we're unable to successfully retrieve the URL for some reason
                 except Exception as err:
                     self._log_vdp_failure(domain, err)
+            # The except of last resort
+            except Exception as err:
+                self._log_vdp_failure(domain, err)
         # Fallback to HTTP in case there is no HTTPS for the given domain
         except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
             logging.warning("Falling back to HTTP for '%s'", domain)
@@ -132,6 +135,7 @@ class VdpScanner:
             # If we're unable to successfully retrieve the URL for some reason
             except Exception as err:
                 self._log_vdp_failure(domain, err)
+        # The except of last resort
         except Exception as err:
             self._log_vdp_failure(domain, err)
 
