@@ -13,8 +13,8 @@ Options:
     -d, --debug                  Enable debugging output.
     -a, --agency-csv=AGENCY_CSV  Filename to use for agency results.
     -t, --domain-csv=DOMAIN_CSV  Filename to use for domain (TLD) results.
-    -p, --path-to-chrome=PATH    Path to the serverless-chrome binary being used
-                                 [default: /usr/local/bin/serverless-chrome]
+    -p, --path-to-chrome=PATH    Specify the Chromium binary to use.
+                                 [default: /usr/bin/chromium]
 """
 
 # Standard Python Libraries
