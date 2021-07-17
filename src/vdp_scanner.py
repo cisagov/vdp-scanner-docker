@@ -13,7 +13,7 @@ Options:
     -d, --debug                  Enable debugging output.
     -a, --agency-csv=AGENCY_CSV  Filename to use for agency results.
     -t, --domain-csv=DOMAIN_CSV  Filename to use for domain (TLD) results.
-    -p, --path-to-chrome=PATH    Specify the Chromium binary to use.
+    -p, --path-to-chromium=PATH  Specify the Chromium binary to use.
                                  [default: /usr/bin/chromium]
 """
 
@@ -273,7 +273,7 @@ def main():
             "--disable-dev-shm-usage",
             "--no-zygote",
         ],
-        "executablePath": args["--path-to-chrome"],
+        "executablePath": args["--path-to-chromium"],
     }
     http_hasher = UrlHasher("sha256", browser_options=browser_opts)
 
