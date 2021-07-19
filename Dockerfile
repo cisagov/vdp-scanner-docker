@@ -42,6 +42,8 @@ RUN apt-get update \
   && apt-get install -y --allow-downgrades --no-install-recommends \
     ca-certificates=20200601~deb10u2 \
     chromium=90.0.4430.212-1~deb10u1 \
+    libxml2-dev=2.9.4+dfsg1-7+deb10u2 \
+    libxslt1-dev=1.1.32-2.2~deb10u1 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
