@@ -41,9 +41,11 @@ FROM python:${PY_VERSION}-slim AS build-stage
 RUN apt-get update \
   && apt-get install -y --allow-downgrades --no-install-recommends \
     ca-certificates=20200601~deb10u2 \
-    # This is the latest package version that is available for all of our
-    # supported platforms.
+    # This is the latest version of the chromium package that is available for
+    # all of our supported platforms. Since it depends on the chromium-common
+    # package of the same version we need to force installation of that as well.
     chromium=89.0.4389.114-1~deb10u1 \
+    chromium-common=89.0.4389.114-1~deb10u1 \
     libxml2-dev=2.9.4+dfsg1-7+deb10u2 \
     libxslt1-dev=1.1.32-2.2~deb10u1 \
   && apt-get clean \
