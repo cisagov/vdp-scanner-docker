@@ -175,17 +175,11 @@ class VdpScanner:
 
     def add_domain_result(self, result: DomainResult) -> None:
         """Process the provided results for a domain."""
-        result_dict = {
-            "Domain": result.domain,
-            "Agency": result.agency,
-            "Organization": result.organization,
-            "Security Contact Email": result.security_contact,
-            "Visited URL": result.visited_url,
-            "Was it Redirected": result.is_redirect,
-            "VDP is Published": result.vdp_present,
-            "VDP Hash": result.vdp_hash,
-        }
-        self.domain_results.append(result_dict)
+        # Create a dict with the values of domain_csv_header as keys and the
+        # contents of result as values. This leverages the fact that the
+        # DomainResult NamedTuple is positionally aligned with the contents of
+        # the domain_csv_header list.
+        self.domain_results.append(dict(zip(self.domain_csv_header, result)))
 
         self.agency_results[result.agency]["Total Domains"] += 1
 
