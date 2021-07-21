@@ -54,6 +54,7 @@ class DomainResult(NamedTuple):
     visited_url: str
     is_redirect: bool
     vdp_present: bool
+    vdp_hash: str
 
 
 class VdpScanner:
@@ -82,6 +83,7 @@ class VdpScanner:
         "Visited URL",
         "Was it Redirected",
         "VDP is Published",
+        "VDP Hash",
     ]
 
     def __init__(self, hasher: UrlHasher):
@@ -105,7 +107,7 @@ class VdpScanner:
         logging.debug("Caught %s", type(err).__name__)
         logging.debug(err)
 
-    def check_for_vdp(self, domain: str) -> Tuple[str, bool, bool]:
+    def check_for_vdp(self, domain: str) -> Tuple[str, bool, bool, str]:
         """Check for a VDP at the given domain and return the relavent information."""
         url = urlparse(f"https://{domain}/vulnerability-disclosure-policy")
         result: Optional[UrlResult] = None
@@ -149,12 +151,12 @@ class VdpScanner:
             self._log_vdp_failure(domain, err)
 
         if not result:
-            return ("", False, False)
+            return ("", False, False, "")
 
         if result.status == 200:
-            return (result.visited_url, result.is_redirect, True)
+            return (result.visited_url, result.is_redirect, True, result.hash)
 
-        return (result.visited_url, result.is_redirect, False)
+        return (result.visited_url, result.is_redirect, False, "")
 
     def process_domain(self, domain_info: Dict[str, Any]) -> None:
         """Process a domain entry from the DotGov CSV."""
@@ -181,6 +183,7 @@ class VdpScanner:
             "Visited URL": result.visited_url,
             "Was it Redirected": result.is_redirect,
             "VDP is Published": result.vdp_present,
+            "VDP Hash": result.vdp_hash,
         }
         self.domain_results.append(result_dict)
 
