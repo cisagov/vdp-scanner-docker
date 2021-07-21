@@ -34,6 +34,10 @@ import urllib3
 # cisagov Libraries
 from hash_http_content import UrlHasher, UrlResult
 
+GITHUB_CSV_URL = (
+    "https://raw.githubusercontent.com/cisagov/dotgov-data/main/current-federal.csv"
+)
+
 
 class DomainResult(NamedTuple):
     """Structured format for a domain check result."""
@@ -246,9 +250,7 @@ def get_local_csv(file: str) -> List[Dict[str, str]]:
 
 def get_remote_csv() -> List[Dict[str, str]]:
     """Load domains from the CSV at the given URL."""
-    resp = requests.get(
-        "https://raw.githubusercontent.com/cisagov/dotgov-data/main/current-federal.csv"
-    )
+    resp = requests.get(GITHUB_CSV_URL)
     if resp.status_code != 200:
         return []
     csv_lines = [str(line, resp.encoding) for line in resp.iter_lines()]
