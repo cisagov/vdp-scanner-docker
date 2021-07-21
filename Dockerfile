@@ -1,4 +1,4 @@
-ARG PY_VERSION=3.9
+ARG PY_VERSION=3.9.6
 
 FROM python:${PY_VERSION} AS compile-stage
 
@@ -10,7 +10,7 @@ LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security
 
 RUN apt-get update \
   && apt-get install -y --allow-downgrades --no-install-recommends \
-    libxml2-dev=2.9.4+dfsg1-7+deb10u1 \
+    libxml2-dev=2.9.4+dfsg1-7+deb10u2 \
     libxslt1-dev=1.1.32-2.2~deb10u1
 
 ENV PY_VENV=/.venv
@@ -21,9 +21,9 @@ ENV PATH="${PY_VENV}/bin:$PATH"
 
 # Install core Python dependencies
 RUN python -m pip install --no-cache-dir \
-  pip==21.0.1 \
-  pipenv==2020.11.15 \
-  setuptools==53.0.0 \
+  pip==21.1.3 \
+  pipenv==2021.5.29 \
+  setuptools==57.4.0 \
   wheel==0.36.2
 
 # Install vdp_scanner.py requirements
@@ -38,28 +38,18 @@ RUN python -m pip uninstall --yes pipenv
 
 FROM python:${PY_VERSION}-slim AS build-stage
 
-ARG SERVERLESS_CHROME_VERSION="v1.0.0-57"
-ARG SERVERLESS_CHROME_LOCAL="/usr/local/bin/serverless-chrome"
-
 RUN apt-get update \
   && apt-get install -y --allow-downgrades --no-install-recommends \
     ca-certificates=20200601~deb10u2 \
-    chromium-common=88.0.4324.182-1~deb10u1 \
-    curl=7.64.0-4+deb10u2 \
-    libnss3=2:3.42.1-1+deb10u3 \
-    libxml2-dev=2.9.4+dfsg1-7+deb10u1 \
+    # This is the latest version of the chromium package that is available for
+    # all of our supported platforms. Since it depends on the chromium-common
+    # package of the same version we need to force installation of that as well.
+    chromium=89.0.4389.114-1~deb10u1 \
+    chromium-common=89.0.4389.114-1~deb10u1 \
+    libxml2-dev=2.9.4+dfsg1-7+deb10u2 \
     libxslt1-dev=1.1.32-2.2~deb10u1 \
-    openssl=1.1.1d-0+deb10u6 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
-
-# Download the specified serverless chrome release and install it for use
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-# Follow redirects and output as the specified file name
-RUN curl -L \
-  https://github.com/adieuadieu/serverless-chrome/releases/download/${SERVERLESS_CHROME_VERSION}/stable-headless-chromium-amazonlinux-2.zip \
-  | gunzip --stdout - > ${SERVERLESS_CHROME_LOCAL}
-RUN chmod 755 ${SERVERLESS_CHROME_LOCAL}
 
 ENV PY_VENV=/.venv
 COPY --from=compile-stage ${PY_VENV} ${PY_VENV}
