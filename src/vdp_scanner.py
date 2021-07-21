@@ -4,6 +4,11 @@ Usage:
     vdp_scanner.py [options] local FILE
     vdp_scanner.py [options] github
 
+Commands:
+    local   Use the provided CSV file as the source of domains to scan.
+    github  Use the CSV of Federal domains from the cisagov/dotgov-data
+            repository as the source of domains to scan.
+
 Arguments:
     FILE  The local CSV file to use.
 
