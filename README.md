@@ -53,7 +53,7 @@ docker run cisagov/vdp-scanner:0.0.2
 
 ### Docker Compose ###
 
-1. Pull the new image from Docker hub:
+1. Pull the new image from Docker Hub:
 
     ```console
     docker-compose pull
