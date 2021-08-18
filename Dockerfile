@@ -1,6 +1,6 @@
 ARG PY_VERSION=3.9.6
 
-FROM python:${PY_VERSION} AS compile-stage
+FROM python:${PY_VERSION}-bullseye AS compile-stage
 
 # For a list of pre-defined annotation keys and value types see:
 # https://github.com/opencontainers/image-spec/blob/master/annotations.md
@@ -36,7 +36,7 @@ RUN PIPENV_VENV_IN_PROJECT=1 pipenv sync
 # as a last step.
 RUN python -m pip uninstall --yes pipenv
 
-FROM python:${PY_VERSION}-slim AS build-stage
+FROM python:${PY_VERSION}-slim-bullseye AS build-stage
 
 RUN apt-get update \
   && apt-get install -y --allow-downgrades --no-install-recommends \
