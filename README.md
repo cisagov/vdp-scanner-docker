@@ -10,7 +10,7 @@
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/cisagov/vdp-scanner)](https://hub.docker.com/r/cisagov/vdp-scanner)
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/cisagov/vdp-scanner)](https://hub.docker.com/r/cisagov/vdp-scanner)
-[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/vdp-scanner/tags)
+[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv7%20%7C%20arm64-blue)](https://hub.docker.com/r/cisagov/vdp-scanner/tags)
 
 This is a Docker project to scan either the
 [GSA current Federal .gov domain list](https://github.com/GSA/data/blob/master/dotgov-domains/current-federal.csv)
