@@ -10,7 +10,7 @@
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/cisagov/vdp-scanner)](https://hub.docker.com/r/cisagov/vdp-scanner)
 [![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/cisagov/vdp-scanner)](https://hub.docker.com/r/cisagov/vdp-scanner)
-[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv6%20%7C%20arm%2Fv7%20%7C%20arm64%20%7C%20ppc64le%20%7C%20s390x-blue)](https://hub.docker.com/r/cisagov/vdp-scanner/tags)
+[![Platforms](https://img.shields.io/badge/platforms-amd64%20%7C%20arm%2Fv7%20%7C%20arm64-blue)](https://hub.docker.com/r/cisagov/vdp-scanner/tags)
 
 This is a Docker project to scan either the
 [GSA current Federal .gov domain list](https://github.com/GSA/data/blob/master/dotgov-domains/current-federal.csv)
@@ -25,7 +25,7 @@ Python library. Then it will output CSVs with agency and domain level results.
 To run the `cisagov/vdp-scanner` image via Docker:
 
 ```console
-docker run cisagov/vdp-scanner:0.0.4
+docker run cisagov/vdp-scanner:0.0.5-rc.1
 ```
 
 ### Running with Docker Compose ###
@@ -38,7 +38,7 @@ docker run cisagov/vdp-scanner:0.0.4
 
     services:
       vdp-scanner:
-        image: 'cisagov/vdp-scanner:0.0.4'
+        image: 'cisagov/vdp-scanner:0.0.5-rc.1'
         volumes:
           - .:/task/host_mount
     ```
@@ -76,7 +76,7 @@ docker run cisagov/vdp-scanner:0.0.4
 1. Pull the new image:
 
     ```console
-    docker pull cisagov/vdp-scanner:0.0.4
+    docker pull cisagov/vdp-scanner:0.0.5-rc.1
     ```
 
 1. Recreate and run the container by following the [previous instructions](#running-with-docker).
@@ -85,11 +85,11 @@ docker run cisagov/vdp-scanner:0.0.4
 
 The images of this container are tagged with
 [semantic versions](https://semver.org).  It is recommended that most users use
-a version tag (e.g. `:0.0.4`).
+a version tag (e.g. `:0.0.5-rc.1`).
 
 | Image:tag | Description |
 |-----------|-------------|
-|`cisagov/vdp-scanner:0.0.4`| An exact release version. |
+|`cisagov/vdp-scanner:0.0.5-rc.1`| An exact release version. |
 |`cisagov/vdp-scanner:0.0`| The most recent release matching the major and minor version numbers. |
 |`cisagov/vdp-scanner:0`| The most recent release matching the major version number. |
 |`cisagov/vdp-scanner:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
@@ -155,7 +155,7 @@ Build the image locally using this git repository as the [build context](https:/
 
 ```console
 docker build \
-  --tag cisagov/vdp-scanner:0.0.4 \
+  --tag cisagov/vdp-scanner:0.0.5-rc.1 \
   https://github.com/cisagov/vdp-scanner-docker.git#develop
 ```
 
@@ -186,7 +186,7 @@ Docker:
       --file Dockerfile-x \
       --platform linux/amd64 \
       --output type=docker \
-      --tag cisagov/vdp-scanner:0.0.4 .
+      --tag cisagov/vdp-scanner:0.0.5-rc.1 .
     ```
 
 ## Contributing ##

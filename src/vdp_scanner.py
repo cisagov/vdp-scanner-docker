@@ -253,9 +253,11 @@ def get_local_csv(file: str) -> List[Dict[str, str]]:
 def get_remote_csv() -> List[Dict[str, str]]:
     """Load domains from the CSV at the given URL."""
     resp = requests.get(GITHUB_CSV_URL)
+    # Default to utf-8 encoding if there is no encoding in the response
+    encoding = resp.encoding if resp.encoding else "utf-8"
     if resp.status_code != 200:
         return []
-    csv_lines = [str(line, resp.encoding) for line in resp.iter_lines()]
+    csv_lines = [str(line, encoding) for line in resp.iter_lines()]
 
     return list(csv.DictReader(csv_lines))
 
