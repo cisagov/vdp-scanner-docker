@@ -21,10 +21,10 @@ ENV PATH="${PY_VENV}/bin:$PATH"
 
 # Install core Python dependencies
 RUN python -m pip install --no-cache-dir \
-  pip==21.1.3 \
+  pip==21.2.4 \
   pipenv==2021.5.29 \
-  setuptools==57.4.0 \
-  wheel==0.36.2
+  setuptools==58.2.0 \
+  wheel==0.37.0
 
 # Install vdp_scanner.py requirements
 COPY src/Pipfile Pipfile
