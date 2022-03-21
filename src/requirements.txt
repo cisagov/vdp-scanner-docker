@@ -1,4 +1,4 @@
 docopt
-https://github.com/cisagov/hash-http-content/archive/v0.0.1.tar.gz
+https://github.com/cisagov/hash-http-content/archive/v0.1.0.tar.gz
 requests
 urllib3
