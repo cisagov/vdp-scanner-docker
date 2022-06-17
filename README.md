@@ -46,7 +46,7 @@ docker run cisagov/vdp-scanner:0.0.5-rc.1
 1. Start the container and detach:
 
     ```console
-    docker-compose up --detach
+    docker compose up --detach
     ```
 
 ## Updating your container ##
@@ -56,13 +56,13 @@ docker run cisagov/vdp-scanner:0.0.5-rc.1
 1. Pull the new image from Docker Hub:
 
     ```console
-    docker-compose pull
+    docker compose pull
     ```
 
 1. Recreate the running container by following the [previous instructions](#running-with-docker-compose):
 
     ```console
-    docker-compose up --detach
+    docker compose up --detach
     ```
 
 ### Docker ###
