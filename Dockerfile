@@ -1,4 +1,4 @@
-ARG PY_VERSION=3.9.11
+ARG PY_VERSION=3.10.5
 
 FROM python:${PY_VERSION}-bullseye AS compile-stage
 
