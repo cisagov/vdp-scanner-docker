@@ -10,7 +10,7 @@ LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security
 
 RUN apt-get update \
   && apt-get install -y --allow-downgrades --no-install-recommends \
-    libxml2-dev=2.9.10+dfsg-6.7 \
+    libxml2-dev=2.9.10+dfsg-6.7+deb11u2 \
     libxslt1-dev=1.1.34-4
 
 ENV PY_VENV=/.venv
@@ -41,9 +41,9 @@ FROM python:${PY_VERSION}-slim-bullseye AS build-stage
 RUN apt-get update \
   && apt-get install -y --allow-downgrades --no-install-recommends \
     ca-certificates=20210119 \
-    chromium=90.0.4430.212-1 \
-    chromium-common=90.0.4430.212-1 \
-    libxml2-dev=2.9.10+dfsg-6.7 \
+    chromium=102.0.5005.115-1~deb11u1 \
+    chromium-common=102.0.5005.115-1~deb11u1 \
+    libxml2-dev=2.9.10+dfsg-6.7+deb11u2 \
     libxslt1-dev=1.1.34-4 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
