@@ -5,14 +5,9 @@ name = "pypi"
 
 [packages]
 docopt = "*"
-hash-http-content = {file = "https://github.com/cisagov/hash-http-content/archive/v0.0.1.tar.gz"}
+hash-http-content = {file = "https://github.com/cisagov/hash-http-content/archive/v0.1.0.tar.gz"}
 requests = "*"
 urllib3 = "*"
-pip = "*"
-setuptools = "*"
-wheel = "*"
-
-[dev-packages]
 
 [requires]
-python_version = "3.9.6"
+python_version = "3.10.5"

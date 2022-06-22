@@ -1,4 +1,4 @@
-ARG PY_VERSION=3.9.6
+ARG PY_VERSION=3.10.5
 
 FROM python:${PY_VERSION}-bullseye AS compile-stage
 
@@ -10,7 +10,7 @@ LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security
 
 RUN apt-get update \
   && apt-get install -y --allow-downgrades --no-install-recommends \
-    libxml2-dev=2.9.10+dfsg-6.7 \
+    libxml2-dev=2.9.10+dfsg-6.7+deb11u2 \
     libxslt1-dev=1.1.34-4
 
 ENV PY_VENV=/.venv
@@ -21,10 +21,10 @@ ENV PATH="${PY_VENV}/bin:$PATH"
 
 # Install core Python dependencies
 RUN python -m pip install --no-cache-dir \
-  pip==21.1.3 \
-  pipenv==2021.5.29 \
-  setuptools==57.4.0 \
-  wheel==0.36.2
+  pip==22.1.2 \
+  pipenv==2022.6.7 \
+  setuptools==62.4.0 \
+  wheel==0.37.1
 
 # Install vdp_scanner.py requirements
 COPY src/Pipfile Pipfile
@@ -41,9 +41,9 @@ FROM python:${PY_VERSION}-slim-bullseye AS build-stage
 RUN apt-get update \
   && apt-get install -y --allow-downgrades --no-install-recommends \
     ca-certificates=20210119 \
-    chromium=90.0.4430.212-1 \
-    chromium-common=90.0.4430.212-1 \
-    libxml2-dev=2.9.10+dfsg-6.7 \
+    chromium=102.0.5005.115-1~deb11u1 \
+    chromium-common=102.0.5005.115-1~deb11u1 \
+    libxml2-dev=2.9.10+dfsg-6.7+deb11u2 \
     libxslt1-dev=1.1.34-4 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
