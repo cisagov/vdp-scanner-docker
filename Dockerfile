@@ -1,4 +1,4 @@
-FROM python:3.10.7-bullseye AS compile-stage
+FROM python:3.10.7-alpine3.16 AS compile-stage
 
 # For a list of pre-defined annotation keys and value types see:
 # https://github.com/opencontainers/image-spec/blob/master/annotations.md
@@ -6,10 +6,9 @@ FROM python:3.10.7-bullseye AS compile-stage
 LABEL org.opencontainers.image.authors="nicholas.mcdonnell@cisa.dhs.gov"
 LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
 
-RUN apt-get update \
-  && apt-get install -y --allow-downgrades --no-install-recommends \
-    libxml2-dev=2.9.10+dfsg-6.7+deb11u2 \
-    libxslt1-dev=1.1.34-4+deb11u1
+RUN apk --no-cache add \
+  libxml2-dev=2.9.14-r1 \
+  libxslt-dev=1.1.35-r0
 
 ENV VIRTUAL_ENV=/task/.venv
 
@@ -33,17 +32,13 @@ COPY src/Pipfile src/Pipfile.lock ./
 # VIRTUAL_ENV environment variable if it is set.
 RUN pipenv sync --clear --verbose
 
-FROM python:3.10.7-slim-bullseye AS build-stage
+FROM python:3.10.7-alpine3.16 AS build-stage
 
-RUN apt-get update \
-  && apt-get install -y --allow-downgrades --no-install-recommends \
-    ca-certificates=20210119 \
-    chromium=104.0.5112.79-1~deb11u1 \
-    chromium-common=104.0.5112.79-1~deb11u1 \
-    libxml2-dev=2.9.10+dfsg-6.7+deb11u2 \
-    libxslt1-dev=1.1.34-4+deb11u1 \
-  && apt-get clean \
-  && rm -rf /var/lib/apt/lists/*
+RUN apk --no-cache add \
+  ca-certificates=20220614-r0 \
+  chromium=102.0.5005.173-r0 \
+  libxml2-dev=2.9.14-r1 \
+  libxslt-dev=1.1.35-r0
 
 ENV VIRTUAL_ENV=/task/.venv
 COPY --from=compile-stage ${VIRTUAL_ENV} ${VIRTUAL_ENV}/

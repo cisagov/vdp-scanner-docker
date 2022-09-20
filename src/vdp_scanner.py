@@ -19,7 +19,7 @@ Options:
     -a, --agency-csv=AGENCY_CSV  Filename to use for agency results.
     -t, --domain-csv=DOMAIN_CSV  Filename to use for domain (TLD) results.
     -p, --path-to-chromium=PATH  Specify the Chromium binary to use.
-                                 [default: /usr/bin/chromium]
+                                 [default: /usr/bin/chromium-browser]
 """
 
 # Standard Python Libraries
