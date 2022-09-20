@@ -29,7 +29,7 @@ env:
   CURL_CACHE_DIR: ~/.cache/curl
   IMAGE_NAME: cisagov/vdp-scanner
   PIP_CACHE_DIR: ~/.cache/pip
-  # These are the only two platforms that Alpine LInux 3.16 offers the chromium
+  # These are the only two platforms that Alpine Linux 3.16 offers the chromium
   # package for at this time.
   PLATFORMS: "linux/amd64,linux/arm64"
   PRE_COMMIT_CACHE_DIR: ~/.cache/pre-commit
