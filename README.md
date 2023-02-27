@@ -2,8 +2,6 @@
 
 [![GitHub Build Status](https://github.com/cisagov/vdp-scanner-docker/workflows/build/badge.svg)](https://github.com/cisagov/vdp-scanner-docker/actions/workflows/build.yml)
 [![CodeQL](https://github.com/cisagov/vdp-scanner-docker/workflows/CodeQL/badge.svg)](https://github.com/cisagov/vdp-scanner-docker/actions/workflows/codeql-analysis.yml)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/cisagov/vdp-scanner-docker.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/vdp-scanner-docker/alerts/)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/cisagov/vdp-scanner-docker.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/cisagov/vdp-scanner-docker/context:python)
 [![Known Vulnerabilities](https://snyk.io/test/github/cisagov/vdp-scanner-docker/badge.svg)](https://snyk.io/test/github/cisagov/vdp-scanner-docker)
 
 ## Docker Image ##
