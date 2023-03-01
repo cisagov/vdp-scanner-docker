@@ -1,4 +1,4 @@
-FROM python:3.10.7-alpine3.16 AS compile-stage
+FROM python:3.10.10-alpine3.17 AS compile-stage
 
 # For a list of pre-defined annotation keys and value types see:
 # https://github.com/opencontainers/image-spec/blob/master/annotations.md
@@ -7,8 +7,8 @@ LABEL org.opencontainers.image.authors="nicholas.mcdonnell@cisa.dhs.gov"
 LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
 
 RUN apk --no-cache add \
-  libxml2-dev=2.9.14-r1 \
-  libxslt-dev=1.1.35-r0
+  libxml2-dev=2.10.3-r1 \
+  libxslt-dev=1.1.37-r0
 
 ENV VIRTUAL_ENV=/task/.venv
 
@@ -32,13 +32,13 @@ COPY src/Pipfile src/Pipfile.lock ./
 # VIRTUAL_ENV environment variable if it is set.
 RUN pipenv sync --clear --verbose
 
-FROM python:3.10.7-alpine3.16 AS build-stage
+FROM python:3.10.10-alpine3.17 AS build-stage
 
 RUN apk --no-cache add \
-  ca-certificates=20220614-r0 \
-  chromium=102.0.5005.173-r0 \
-  libxml2-dev=2.9.14-r1 \
-  libxslt-dev=1.1.35-r0
+  ca-certificates=20220614-r4 \
+  chromium=110.0.5481.177-r0 \
+  libxml2-dev=2.10.3-r1 \
+  libxslt-dev=1.1.37-r0
 
 ENV VIRTUAL_ENV=/task/.venv
 COPY --from=compile-stage ${VIRTUAL_ENV} ${VIRTUAL_ENV}/
