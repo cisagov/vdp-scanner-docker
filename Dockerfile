@@ -1,4 +1,12 @@
-FROM python:3.10.7-alpine3.16 AS compile-stage
+# We use an Alpine base image in the compile-stage because of the build
+# requirements for some of the Python requirements. When the python3-dev
+# package is installed it will also install the python3 package which leaves us
+# with two Python installations if we use a Python Docker image. Instead we use
+# Alpine's python3 package here to create the virtual environment we will use
+# in the Python Docker image we use for the build-stage. The tag of the Python
+# Docker image matches the version of the python3 package available on Alpine
+# for consistency.
+FROM alpine:3.17 AS compile-stage
 
 # For a list of pre-defined annotation keys and value types see:
 # https://github.com/opencontainers/image-spec/blob/master/annotations.md
@@ -7,8 +15,15 @@ LABEL org.opencontainers.image.authors="nicholas.mcdonnell@cisa.dhs.gov"
 LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
 
 RUN apk --no-cache add \
-  libxml2-dev=2.9.14-r1 \
-  libxslt-dev=1.1.35-r0
+  gcc=12.2.1_git20220924-r4 \
+  libc-dev=0.7.2-r3 \
+  libxml2-dev=2.10.3-r1 \
+  libxslt-dev=1.1.37-r0 \
+  py3-pip=22.3.1-r1 \
+  py3-setuptools=65.6.0-r0 \
+  py3-wheel=0.38.4-r0 \
+  python3-dev=3.10.10-r0 \
+  python3=3.10.10-r0
 
 ENV VIRTUAL_ENV=/task/.venv
 
@@ -32,16 +47,22 @@ COPY src/Pipfile src/Pipfile.lock ./
 # VIRTUAL_ENV environment variable if it is set.
 RUN pipenv sync --clear --verbose
 
-FROM python:3.10.7-alpine3.16 AS build-stage
+# The version of Python used here should match the version of the Alpine
+# python3 package installed in the compile-stage.
+FROM python:3.10.10-alpine3.17 AS build-stage
 
 RUN apk --no-cache add \
-  ca-certificates=20220614-r0 \
-  chromium=102.0.5005.173-r0 \
-  libxml2-dev=2.9.14-r1 \
-  libxslt-dev=1.1.35-r0
+  ca-certificates=20220614-r4 \
+  chromium=110.0.5481.177-r0 \
+  libxml2-dev=2.10.3-r1 \
+  libxslt-dev=1.1.37-r0
 
 ENV VIRTUAL_ENV=/task/.venv
+
+# Copy in the Python venv we created in the compile stage and re-symlink
+# python3 in the venv to the Python binary in this image
 COPY --from=compile-stage ${VIRTUAL_ENV} ${VIRTUAL_ENV}/
+RUN ln -sf "$(command -v python3)" "${VIRTUAL_ENV}"/bin/python3
 ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
 ENV TASK_HOME="/task"
