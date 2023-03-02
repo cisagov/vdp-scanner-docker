@@ -17,10 +17,10 @@ LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security
 ENV VIRTUAL_ENV=/task/.venv
 
 # Versions of the Python packages installed directly
-ENV PYTHON_PIP_VERSION=22.2.2
-ENV PYTHON_PIPENV_VERSION=2022.9.8
-ENV PYTHON_SETUPTOOLS_VERSION=65.3.0
-ENV PYTHON_WHEEL_VERSION=0.37.1
+ENV PYTHON_PIP_VERSION=23.0.1
+ENV PYTHON_PIPENV_VERSION=2023.2.18
+ENV PYTHON_SETUPTOOLS_VERSION=67.4.0
+ENV PYTHON_WHEEL_VERSION=0.38.4
 
 RUN apk --no-cache add \
   gcc=12.2.1_git20220924-r4 \
