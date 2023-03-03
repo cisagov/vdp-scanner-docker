@@ -14,6 +14,14 @@ FROM alpine:3.17 AS compile-stage
 LABEL org.opencontainers.image.authors="nicholas.mcdonnell@cisa.dhs.gov"
 LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
 
+ENV VIRTUAL_ENV=/task/.venv
+
+# Versions of the Python packages installed directly
+ENV PYTHON_PIP_VERSION=23.0.1
+ENV PYTHON_PIPENV_VERSION=2023.2.18
+ENV PYTHON_SETUPTOOLS_VERSION=67.4.0
+ENV PYTHON_WHEEL_VERSION=0.38.4
+
 RUN apk --no-cache add \
   gcc=12.2.1_git20220924-r4 \
   libc-dev=0.7.2-r3 \
@@ -25,20 +33,18 @@ RUN apk --no-cache add \
   python3-dev=3.10.10-r0 \
   python3=3.10.10-r0
 
-ENV VIRTUAL_ENV=/task/.venv
-
 # Install pipenv to manage installing the Python dependencies into a created
 # Python virtual environment. This is done separately from the virtual
 # environment so that pipenv and its dependencies are not installed in the
 # Python virtual environment used in the final image.
-RUN python -m pip install --no-cache-dir --upgrade pipenv==2022.9.8 \
+RUN python -m pip install --no-cache-dir --upgrade pipenv==${PYTHON_PIPENV_VERSION} \
   # Manually create Python virtual environment for the final image
   && python3 -m venv ${VIRTUAL_ENV} \
   # Ensure the core Python packages are installed in the virtual environment
   && ${VIRTUAL_ENV}/bin/python3 -m pip install --no-cache-dir --upgrade \
-    pip==22.2.2 \
-    setuptools==65.3.0 \
-    wheel==0.37.1
+    pip==${PYTHON_PIP_VERSION} \
+    setuptools==${PYTHON_SETUPTOOLS_VERSION} \
+    wheel==${PYTHON_WHEEL_VERSION}
 
 # Install vdp_scanner.py requirements
 WORKDIR /tmp
