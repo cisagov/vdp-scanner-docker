@@ -14,7 +14,10 @@ FROM alpine:3.17 AS compile-stage
 LABEL org.opencontainers.image.authors="nicholas.mcdonnell@cisa.dhs.gov"
 LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
 
-ENV VIRTUAL_ENV=/task/.venv
+# Unprivileged user information necessary for the Python virtual environment
+ARG CISA_USER="cisa"
+ENV CISA_HOME="/home/${CISA_USER}"
+ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 # Versions of the Python packages installed directly
 ENV PYTHON_PIP_VERSION=23.0.1
@@ -57,26 +60,37 @@ RUN pipenv sync --clear --verbose
 # python3 package installed in the compile-stage.
 FROM python:3.10.10-alpine3.17 AS build-stage
 
+# Unprivileged user information
+ARG CISA_UID=2048
+ARG CISA_GID=${CISA_UID}
+ARG CISA_USER="cisa"
+ENV CISA_GROUP=${CISA_USER}
+ENV CISA_HOME="/home/${CISA_USER}"
+ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
+
 RUN apk --no-cache add \
   ca-certificates=20220614-r4 \
   chromium=110.0.5481.177-r0 \
   libxml2-dev=2.10.3-r1 \
   libxslt-dev=1.1.37-r0
 
-ENV VIRTUAL_ENV=/task/.venv
+# Create unprivileged user
+RUN addgroup --system --gid ${CISA_GID} ${CISA_GROUP} \
+  && adduser --system --uid ${CISA_UID} --ingroup ${CISA_GROUP} ${CISA_USER}
 
 # Copy in the Python venv we created in the compile stage and re-symlink
 # python3 in the venv to the Python binary in this image
-COPY --from=compile-stage ${VIRTUAL_ENV} ${VIRTUAL_ENV}/
+COPY --from=compile-stage --chown=${CISA_USER}:${CISA_GROUP} ${VIRTUAL_ENV} ${VIRTUAL_ENV}/
 RUN ln -sf "$(command -v python3)" "${VIRTUAL_ENV}"/bin/python3
 ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
-ENV TASK_HOME="/task"
-
-WORKDIR ${TASK_HOME}
+WORKDIR ${CISA_HOME}
 RUN mkdir host_mount
 
-COPY src/version.txt src/vdp_scanner.py ./
+# Copy in the necessary files
+COPY --chown=${CISA_USER}:${CISA_GROUP} src/version.txt src/vdp_scanner.py ./
 
+# Prepare to run
+USER ${CISA_USER}:${CISA_GROUP}
 ENTRYPOINT ["python", "vdp_scanner.py"]
 CMD ["github"]
