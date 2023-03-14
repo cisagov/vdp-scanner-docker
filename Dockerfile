@@ -71,8 +71,8 @@ ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 RUN apk --no-cache add \
   ca-certificates=20220614-r4 \
   chromium=110.0.5481.177-r0 \
-  libxml2-dev=2.10.3-r1 \
-  libxslt-dev=1.1.37-r1
+  libxml2=2.10.3-r1 \
+  libxslt=1.1.37-r1
 
 # Create unprivileged user
 RUN addgroup --system --gid ${CISA_GID} ${CISA_GROUP} \
