@@ -29,7 +29,7 @@ RUN apk --no-cache add \
   gcc=12.2.1_git20220924-r4 \
   libc-dev=0.7.2-r3 \
   libxml2-dev=2.10.3-r1 \
-  libxslt-dev=1.1.37-r0 \
+  libxslt-dev=1.1.37-r1 \
   py3-pip=22.3.1-r1 \
   py3-setuptools=65.6.0-r0 \
   py3-wheel=0.38.4-r0 \
@@ -72,7 +72,7 @@ RUN apk --no-cache add \
   ca-certificates=20220614-r4 \
   chromium=110.0.5481.177-r0 \
   libxml2-dev=2.10.3-r1 \
-  libxslt-dev=1.1.37-r0
+  libxslt-dev=1.1.37-r1
 
 # Create unprivileged user
 RUN addgroup --system --gid ${CISA_GID} ${CISA_GROUP} \
