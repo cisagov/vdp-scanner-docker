@@ -16,6 +16,7 @@ Options:
     -h, --help                   Show this help message.
     -v, --version                Show script version.
     -d, --debug                  Enable debugging output.
+    -o, --output-dir=OUTPUT_DIR  Output directory path. [default: host_mount]
     -a, --agency-csv=AGENCY_CSV  Filename to use for agency results.
     -t, --domain-csv=DOMAIN_CSV  Filename to use for domain (TLD) results.
     -p, --path-to-chromium=PATH  Specify the Chromium binary to use.
@@ -86,13 +87,13 @@ class VdpScanner:
         "VDP Hash",
     ]
 
-    def __init__(self, hasher: UrlHasher):
+    def __init__(self, hasher: UrlHasher, output_directory: str):
         """Initialize variables and perform setup."""
         self._hasher = hasher
         file_date = datetime.utcnow().strftime("%Y-%m-%d")
         self.agency_csv = f"agency_results_{file_date}.csv"
         self.domain_csv = f"domain_results_{file_date}.csv"
-        self.output_directory = "host_mount"
+        self.output_directory = output_directory
 
         self.agency_results: defaultdict = defaultdict(
             lambda: {k: 0 for k in self.agency_csv_header[1:]}
@@ -287,7 +288,7 @@ def main():
     }
     http_hasher = UrlHasher("sha256", browser_options=browser_opts)
 
-    scanner: VdpScanner = VdpScanner(http_hasher)
+    scanner: VdpScanner = VdpScanner(http_hasher, args["--output-dir"])
     if args["--agency-csv"]:
         scanner.agency_csv = args["--agency-csv"]
     if args["--domain-csv"]:
