@@ -16,6 +16,7 @@ Options:
     -h, --help                   Show this help message.
     -v, --version                Show script version.
     -d, --debug                  Enable debugging output.
+    -i, --input-dir=INPUT_DIR    Input directory path. [default: host_mount]
     -o, --output-dir=OUTPUT_DIR  Output directory path. [default: host_mount]
     -a, --agency-csv=AGENCY_CSV  Filename to use for agency results.
     -t, --domain-csv=DOMAIN_CSV  Filename to use for domain (TLD) results.
@@ -297,7 +298,7 @@ def main():
     domains_to_scan: List[Dict[str, str]]
 
     if args["local"]:
-        domains_to_scan = get_local_csv(path_join("host_mount", args["FILE"]))
+        domains_to_scan = get_local_csv(path_join(args["--input-dir"], args["FILE"]))
 
     if args["github"]:
         domains_to_scan = get_remote_csv()
