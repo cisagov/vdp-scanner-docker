@@ -69,7 +69,12 @@ ARG CISA_GID=${CISA_UID}
 ARG CISA_USER="cisa"
 ENV CISA_GROUP=${CISA_USER}
 ENV CISA_HOME="/home/${CISA_USER}"
+
+# Python virtual environment location
 ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
+
+# Host mount directory
+ARG HOST_MOUNT="${CISA_HOME}/host_mount"
 
 RUN apk --no-cache add \
   ca-certificates=20220614-r4 \
@@ -81,19 +86,20 @@ RUN apk --no-cache add \
 RUN addgroup --system --gid ${CISA_GID} ${CISA_GROUP} \
   && adduser --system --uid ${CISA_UID} --ingroup ${CISA_GROUP} ${CISA_USER}
 
+# Create the HOST MOUNT directory (and any intermediate directories)
+RUN mkdir --parents ${HOST_MOUNT}
+
 # Copy in the Python venv we created in the compile stage and re-symlink
 # python3 in the venv to the Python binary in this image
 COPY --from=compile-stage --chown=${CISA_USER}:${CISA_GROUP} ${VIRTUAL_ENV} ${VIRTUAL_ENV}/
 RUN ln -sf "$(command -v python3)" "${VIRTUAL_ENV}"/bin/python3
 ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
-WORKDIR ${CISA_HOME}
-RUN mkdir host_mount
-
 # Copy in the necessary files
-COPY --chown=${CISA_USER}:${CISA_GROUP} src/version.txt src/vdp_scanner.py ./
+COPY --chown=${CISA_USER}:${CISA_GROUP} src/version.txt src/vdp_scanner.py ${CISA_HOME}/
 
 # Prepare to run
+WORKDIR ${CISA_HOME}
 USER ${CISA_USER}:${CISA_GROUP}
 ENTRYPOINT ["python3", "vdp_scanner.py"]
 CMD ["github"]
