@@ -11,7 +11,7 @@ FROM alpine:3.17 AS compile-stage
 # For a list of pre-defined annotation keys and value types see:
 # https://github.com/opencontainers/image-spec/blob/master/annotations.md
 # Note: Additional labels are added by the build workflow.
-LABEL org.opencontainers.image.authors="nicholas.mcdonnell@cisa.dhs.gov"
+LABEL org.opencontainers.image.authors="vm-fusion-dev-group@trio.dhs.gov"
 LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
 
 # Unprivileged user information necessary for the Python virtual environment
