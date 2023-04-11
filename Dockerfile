@@ -33,8 +33,8 @@ RUN apk --no-cache add \
   py3-pip=22.3.1-r1 \
   py3-setuptools=65.6.0-r0 \
   py3-wheel=0.38.4-r0 \
-  python3-dev=3.10.10-r0 \
-  python3=3.10.10-r0
+  python3-dev=3.10.11-r0 \
+  python3=3.10.11-r0
 
 # Install pipenv to manage installing the Python dependencies into a created
 # Python virtual environment. This is done separately from the virtual
@@ -58,7 +58,7 @@ RUN pipenv sync --clear --verbose
 
 # The version of Python used here should match the version of the Alpine
 # python3 package installed in the compile-stage.
-FROM python:3.10.10-alpine3.17 AS build-stage
+FROM python:3.10.11-alpine3.17 AS build-stage
 
 # Unprivileged user information
 ARG CISA_UID=2048
