@@ -22,19 +22,19 @@ ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 # Versions of the Python packages installed directly
 ENV PYTHON_PIP_VERSION=23.0.1
 ENV PYTHON_PIPENV_VERSION=2023.3.20
-ENV PYTHON_SETUPTOOLS_VERSION=67.6.0
+ENV PYTHON_SETUPTOOLS_VERSION=67.6.1
 ENV PYTHON_WHEEL_VERSION=0.40.0
 
 RUN apk --no-cache add \
   gcc=12.2.1_git20220924-r4 \
   libc-dev=0.7.2-r3 \
-  libxml2-dev=2.10.3-r1 \
+  libxml2-dev=2.10.4-r0 \
   libxslt-dev=1.1.37-r1 \
   py3-pip=22.3.1-r1 \
   py3-setuptools=65.6.0-r0 \
   py3-wheel=0.38.4-r0 \
-  python3-dev=3.10.10-r0 \
-  python3=3.10.10-r0
+  python3-dev=3.10.11-r0 \
+  python3=3.10.11-r0
 
 # Install pipenv to manage installing the Python dependencies into a created
 # Python virtual environment. This is done separately from the virtual
@@ -58,7 +58,7 @@ RUN pipenv sync --clear --verbose
 
 # The version of Python used here should match the version of the Alpine
 # python3 package installed in the compile-stage.
-FROM python:3.10.10-alpine3.17 AS build-stage
+FROM python:3.10.11-alpine3.17 AS build-stage
 
 # Unprivileged user information
 ARG CISA_UID=2048
@@ -70,8 +70,8 @@ ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 RUN apk --no-cache add \
   ca-certificates=20220614-r4 \
-  chromium=110.0.5481.177-r0 \
-  libxml2=2.10.3-r1 \
+  chromium=112.0.5615.49-r0 \
+  libxml2=2.10.4-r0 \
   libxslt=1.1.37-r1
 
 # Create unprivileged user
