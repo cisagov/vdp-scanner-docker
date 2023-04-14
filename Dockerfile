@@ -54,9 +54,12 @@ RUN pipenv sync --clear --verbose
 # python3 package installed in the compile-stage.
 FROM python:3.10.11-alpine3.17 AS build-stage
 
+###
 # For a list of pre-defined annotation keys and value types see:
 # https://github.com/opencontainers/image-spec/blob/master/annotations.md
+#
 # Note: Additional labels are added by the build workflow.
+###
 LABEL org.opencontainers.image.authors="vm-fusion-dev-group@trio.dhs.gov"
 LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
 
