@@ -42,6 +42,9 @@ from hash_http_content import UrlHasher, UrlResult
 GITHUB_CSV_URL = (
     "https://raw.githubusercontent.com/cisagov/dotgov-data/main/current-federal.csv"
 )
+# The time in seconds to wait for a response from github.com before
+# giving up.  Thirty seconds seems like more than enough time.
+GITHUB_CSV_URL_TIMEOUT = 30
 
 
 class DomainResult(NamedTuple):
@@ -252,7 +255,7 @@ def get_local_csv(file: str) -> List[Dict[str, str]]:
 
 def get_remote_csv() -> List[Dict[str, str]]:
     """Load domains from the CSV at the given URL."""
-    resp = requests.get(GITHUB_CSV_URL)
+    resp = requests.get(GITHUB_CSV_URL, timeout=GITHUB_CSV_URL_TIMEOUT)
     # Default to utf-8 encoding if there is no encoding in the response
     encoding = resp.encoding if resp.encoding else "utf-8"
     if resp.status_code != 200:
