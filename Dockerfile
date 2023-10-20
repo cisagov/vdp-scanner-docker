@@ -27,8 +27,8 @@ RUN apk --no-cache add \
   py3-pip=22.3.1-r1 \
   py3-setuptools=65.6.0-r0 \
   py3-wheel=0.38.4-r0 \
-  python3-dev=3.10.12-r0 \
-  python3=3.10.12-r0
+  python3-dev=3.10.13-r0 \
+  python3=3.10.13-r0
 
 # Install pipenv to manage installing the Python dependencies into a created
 # Python virtual environment. This is done separately from the virtual
