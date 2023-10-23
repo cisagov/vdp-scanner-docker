@@ -14,21 +14,21 @@ ENV CISA_HOME="/home/${CISA_USER}"
 ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 # Versions of the Python packages installed directly
-ENV PYTHON_PIP_VERSION=23.0.1
-ENV PYTHON_PIPENV_VERSION=2023.3.20
-ENV PYTHON_SETUPTOOLS_VERSION=67.6.1
+ENV PYTHON_PIP_VERSION=23.1.2
+ENV PYTHON_PIPENV_VERSION=2023.10.20
+ENV PYTHON_SETUPTOOLS_VERSION=67.7.2
 ENV PYTHON_WHEEL_VERSION=0.40.0
 
 RUN apk --no-cache add \
-  gcc=12.2.1_git20220924-r4 \
-  libc-dev=0.7.2-r3 \
-  libxml2-dev=2.10.4-r0 \
-  libxslt-dev=1.1.37-r1 \
-  py3-pip=22.3.1-r1 \
-  py3-setuptools=65.6.0-r0 \
-  py3-wheel=0.38.4-r0 \
-  python3-dev=3.10.13-r0 \
-  python3=3.10.13-r0
+  gcc=12.2.1_git20220924-r10 \
+  libc-dev=0.7.2-r5 \
+  libxml2-dev=2.11.4-r0 \
+  libxslt-dev=1.1.38-r0 \
+  py3-pip=23.1.2-r0 \
+  py3-setuptools=67.7.2-r0 \
+  py3-wheel=0.40.0-r1 \
+  python3-dev=3.11.6-r0 \
+  python3=3.11.6-r0
 
 # Install pipenv to manage installing the Python dependencies into a created
 # Python virtual environment. This is done separately from the virtual
