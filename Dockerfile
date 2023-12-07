@@ -73,7 +73,7 @@ ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 RUN apk --no-cache add \
   ca-certificates=20230506-r0 \
-  chromium=117.0.5938.62-r0 \
+  chromium=119.0.6045.159-r0 \
   libxml2=2.11.6-r0 \
   libxslt=1.1.38-r0
 
