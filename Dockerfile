@@ -22,7 +22,7 @@ ENV PYTHON_WHEEL_VERSION=0.40.0
 RUN apk --no-cache add \
   gcc=12.2.1_git20220924-r10 \
   libc-dev=0.7.2-r5 \
-  libxml2-dev=2.11.4-r0 \
+  libxml2-dev=2.11.6-r0 \
   libxslt-dev=1.1.38-r0 \
   py3-pip=23.1.2-r0 \
   py3-setuptools=67.7.2-r0 \
@@ -73,8 +73,8 @@ ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 RUN apk --no-cache add \
   ca-certificates=20230506-r0 \
-  chromium=117.0.5938.62-r0 \
-  libxml2=2.11.4-r0 \
+  chromium=119.0.6045.159-r0 \
+  libxml2=2.11.6-r0 \
   libxslt=1.1.38-r0
 
 # Create unprivileged user
