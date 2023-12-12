@@ -6,7 +6,7 @@
 # in the Python Docker image we use for the build-stage. The tag of the Python
 # Docker image matches the version of the python3 package available on Alpine
 # for consistency.
-FROM alpine:3.18 AS compile-stage
+FROM alpine:3.19 AS compile-stage
 
 # Unprivileged user information necessary for the Python virtual environment
 ARG CISA_USER="cisa"
