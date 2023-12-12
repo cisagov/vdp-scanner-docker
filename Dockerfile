@@ -52,7 +52,7 @@ RUN pipenv sync --clear --verbose
 
 # The version of Python used here should match the version of the Alpine
 # python3 package installed in the compile-stage.
-FROM python:3.11.6-alpine3.18 AS build-stage
+FROM python:3.12.1-alpine3.18 AS build-stage
 
 ###
 # For a list of pre-defined annotation keys and value types see:
