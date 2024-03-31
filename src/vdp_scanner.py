@@ -164,14 +164,14 @@ class VdpScanner:
     def process_domain(self, domain_info: Dict[str, Any]) -> None:
         """Process a domain entry from the DotGov CSV."""
         # These are direct copies from current-federal.csv
-        vdp_result = self.check_for_vdp(domain_info["Domain Name"])
+        vdp_result = self.check_for_vdp(domain_info["Domain name"])
 
         self.add_domain_result(
             DomainResult(
-                domain_info["Domain Name"],
+                domain_info["Domain name"],
                 domain_info["Agency"],
-                domain_info["Organization"],
-                domain_info["Security Contact Email"],
+                domain_info["Organization name"],
+                domain_info["Security contact email"],
                 *vdp_result,
             )
         )
@@ -306,10 +306,10 @@ def main():
 
     total_domains = len(domains_to_scan)
     for i, domain_info in enumerate(
-        sorted(domains_to_scan, key=lambda d: d["Domain Name"]), start=1
+        sorted(domains_to_scan, key=lambda d: d["Domain name"]), start=1
     ):
         logging.info(
-            "Processing '%s' (%d/%d)...", domain_info["Domain Name"], i, total_domains
+            "Processing '%s' (%d/%d)...", domain_info["Domain name"], i, total_domains
         )
         scanner.process_domain(domain_info)
 
