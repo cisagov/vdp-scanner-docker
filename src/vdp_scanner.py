@@ -237,12 +237,9 @@ class VdpScanner:
 def get_version(version_file) -> str:
     """Extract a version number from the given file path."""
     with open(version_file) as vfile:
-        for line in vfile.read().splitlines():
-            if line.startswith("__version__"):
-                delim = '"' if '"' in line else "'"
-                return line.split(delim)[1]
+        return vfile.read().strip()
 
-    raise RuntimeError("Unable to find version string.")
+    raise RuntimeError("Failed to extract version string.")
 
 
 def get_local_csv(file: str) -> List[Dict[str, str]]:
