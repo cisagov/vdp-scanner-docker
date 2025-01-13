@@ -10,4 +10,4 @@ requests = "*"
 urllib3 = "*"
 
 [requires]
-python_full_version = "3.11.8"
+python_full_version = "3.11.11"
