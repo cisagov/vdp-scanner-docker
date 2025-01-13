@@ -6,7 +6,7 @@
 # in the Python Docker image we use for the build-stage. The tag of the Python
 # Docker image matches the version of the python3 package available on Alpine
 # for consistency.
-FROM docker.io/library/alpine:3.18 AS compile-stage
+FROM docker.io/library/alpine:3.19 AS compile-stage
 
 ###
 # Unprivileged user variables
@@ -29,8 +29,8 @@ RUN apk --no-cache add \
   py3-pip=23.1.2-r0 \
   py3-setuptools=67.7.2-r0 \
   py3-wheel=0.40.0-r1 \
-  python3-dev=3.11.8-r0 \
-  python3=3.11.8-r0
+  python3-dev=3.11.11-r0 \
+  python3=3.11.11-r0
 
 ###
 # Install the specified versions of pip, setuptools, and wheel into the system
@@ -70,7 +70,7 @@ RUN pipenv check --verbose \
 
 # The version of Python used here should match the version of the Alpine
 # python3 package installed in the compile-stage.
-FROM docker.io/library/python:3.11.8-alpine3.18 AS build-stage
+FROM docker.io/library/python:3.11.11-alpine3.19 AS build-stage
 
 ###
 # For a list of pre-defined annotation keys and value types see:
