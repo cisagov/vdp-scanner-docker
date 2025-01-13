@@ -22,10 +22,7 @@ ENV PYTHON_SETUPTOOLS_VERSION=69.2.0
 ENV PYTHON_WHEEL_VERSION=0.43.0
 
 RUN apk --no-cache add \
-  gcc=13.2.1_git20231014-r0 \
-  libc-dev=0.7.2-r5 \
-  libxml2-dev=2.11.8-r0 \
-  libxslt-dev=1.1.39-r0 \
+  py3-lxml=4.9.3-r1 \
   py3-pip=23.3.1-r0 \
   py3-setuptools=70.3.0-r0 \
   py3-wheel=0.42.0-r0 \
@@ -52,7 +49,7 @@ RUN python3 -m venv --system-site-packages /usr/local \
     && /usr/local/bin/python3 -m pip install --no-cache-dir --upgrade \
         pipenv==${PYTHON_PIPENV_VERSION} \
     # Manually create the virtual environment
-    && python3 -m venv ${VIRTUAL_ENV} \
+    && python3 -m venv --system-site-packages ${VIRTUAL_ENV} \
     # Ensure the core Python packages are installed in the virtual environment
     && ${VIRTUAL_ENV}/bin/python3 -m pip install --no-cache-dir --upgrade \
         pip==${PYTHON_PIP_VERSION} \
@@ -97,8 +94,7 @@ ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 RUN apk --no-cache add \
   ca-certificates=20241121-r1 \
   chromium=124.0.6367.78-r0 \
-  libxml2=2.11.8-r0 \
-  libxslt=1.1.39-r0
+  py3-lxml=4.9.3-r1
 
 # Create unprivileged user
 RUN addgroup --system --gid ${CISA_GID} ${CISA_GROUP} \
