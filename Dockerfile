@@ -6,9 +6,11 @@
 # in the Python Docker image we use for the build-stage. The tag of the Python
 # Docker image matches the version of the python3 package available on Alpine
 # for consistency.
-FROM alpine:3.18 AS compile-stage
+FROM docker.io/library/alpine:3.18 AS compile-stage
 
-# Unprivileged user information necessary for the Python virtual environment
+###
+# Unprivileged user variables
+###
 ARG CISA_USER="cisa"
 ENV CISA_HOME="/home/${CISA_USER}"
 ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
@@ -30,29 +32,45 @@ RUN apk --no-cache add \
   python3-dev=3.11.8-r0 \
   python3=3.11.8-r0
 
-# Install pipenv to manage installing the Python dependencies into a created
-# Python virtual environment. This is done separately from the virtual
-# environment so that pipenv and its dependencies are not installed in the
-# Python virtual environment used in the final image.
-RUN python3 -m pip install --no-cache-dir --upgrade pipenv==${PYTHON_PIPENV_VERSION} \
-  # Manually create Python virtual environment for the final image
-  && python3 -m venv ${VIRTUAL_ENV} \
-  # Ensure the core Python packages are installed in the virtual environment
-  && ${VIRTUAL_ENV}/bin/python3 -m pip install --no-cache-dir --upgrade \
-    pip==${PYTHON_PIP_VERSION} \
-    setuptools==${PYTHON_SETUPTOOLS_VERSION} \
-    wheel==${PYTHON_WHEEL_VERSION}
+###
+# Install the specified versions of pip, setuptools, and wheel into the system
+# Python environment; install the specified version of pipenv into the system Python
+# environment; set up a Python virtual environment (venv); and install the specified
+# versions of pip, setuptools, and wheel into the venv.
+#
+# Note that we use the --no-cache-dir flag to avoid writing to a local
+# cache.  This results in a smaller final image, at the cost of
+# slightly longer install times.
+###
+RUN python3 -m pip install --no-cache-dir --upgrade \
+        pip==${PYTHON_PIP_VERSION} \
+        setuptools==${PYTHON_SETUPTOOLS_VERSION} \
+        wheel==${PYTHON_WHEEL_VERSION} \
+    && python3 -m pip install --no-cache-dir --upgrade \
+        pipenv==${PYTHON_PIPENV_VERSION} \
+    # Manually create the virtual environment
+    && python3 -m venv ${VIRTUAL_ENV} \
+    # Ensure the core Python packages are installed in the virtual environment
+    && ${VIRTUAL_ENV}/bin/python3 -m pip install --no-cache-dir --upgrade \
+        pip==${PYTHON_PIP_VERSION} \
+        setuptools==${PYTHON_SETUPTOOLS_VERSION} \
+        wheel==${PYTHON_WHEEL_VERSION}
 
-# Install vdp_scanner.py requirements
+###
+# Check the Pipfile configuration and then install the Python dependencies into
+# the virtual environment.
+#
+# Note that pipenv will install into a virtual environment if the VIRTUAL_ENV
+# environment variable is set.
+###
 WORKDIR /tmp
 COPY src/Pipfile src/Pipfile.lock ./
-# pipenv will install packages into the virtual environment specified in the
-# VIRTUAL_ENV environment variable if it is set.
-RUN pipenv sync --clear --verbose
+RUN pipenv check --verbose \
+    && pipenv install --clear --deploy --extra-pip-args "--no-cache-dir" --verbose
 
 # The version of Python used here should match the version of the Alpine
 # python3 package installed in the compile-stage.
-FROM python:3.11.8-alpine3.18 AS build-stage
+FROM docker.io/library/python:3.11.8-alpine3.18 AS build-stage
 
 ###
 # For a list of pre-defined annotation keys and value types see:
@@ -63,7 +81,9 @@ FROM python:3.11.8-alpine3.18 AS build-stage
 LABEL org.opencontainers.image.authors="vm-fusion-dev-group@trio.dhs.gov"
 LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
 
-# Unprivileged user information
+###
+# Unprivileged user setup variables
+###
 ARG CISA_UID=2048
 ARG CISA_GID=${CISA_UID}
 ARG CISA_USER="cisa"
@@ -81,10 +101,17 @@ RUN apk --no-cache add \
 RUN addgroup --system --gid ${CISA_GID} ${CISA_GROUP} \
   && adduser --system --uid ${CISA_UID} --ingroup ${CISA_GROUP} ${CISA_USER}
 
-# Copy in the Python venv we created in the compile stage and re-symlink
-# python3 in the venv to the Python binary in this image
-COPY --from=compile-stage --chown=${CISA_USER}:${CISA_GROUP} ${VIRTUAL_ENV} ${VIRTUAL_ENV}/
-RUN ln -sf "$(command -v python3)" "${VIRTUAL_ENV}"/bin/python3
+###
+# Copy in the Python virtual environment created in compile-stage, symlink the
+# Python binary in the venv to the system-wide Python, and add the venv to the PATH.
+#
+# Note that we symlink the Python binary in the venv to the system-wide Python so that
+# any calls to `python3` will use our virtual environment. We are using short flags
+# because the ln binary in Alpine Linux does not support long flags. The -f instructs
+# ln to remove the existing file and the -s instructs ln to create a symbolic link.
+###
+COPY --from=compile-stage --chown=${CISA_USER}:${CISA_GROUP} ${VIRTUAL_ENV} ${VIRTUAL_ENV}
+RUN ln -fs "$(command -v python3)" "${VIRTUAL_ENV}"/bin/python3
 ENV PATH="${VIRTUAL_ENV}/bin:$PATH"
 
 WORKDIR ${CISA_HOME}
@@ -93,7 +120,9 @@ RUN mkdir host_mount
 # Copy in the necessary files
 COPY --chown=${CISA_USER}:${CISA_GROUP} src/version.txt src/vdp_scanner.py ./
 
+###
 # Prepare to run
+###
 USER ${CISA_USER}:${CISA_GROUP}
 ENTRYPOINT ["python3", "vdp_scanner.py"]
 CMD ["github"]
