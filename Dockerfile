@@ -22,13 +22,13 @@ ENV PYTHON_SETUPTOOLS_VERSION=69.2.0
 ENV PYTHON_WHEEL_VERSION=0.43.0
 
 RUN apk --no-cache add \
-  gcc=12.2.1_git20220924-r10 \
+  gcc=13.2.1_git20231014-r0 \
   libc-dev=0.7.2-r5 \
-  libxml2-dev=2.11.7-r00 \
-  libxslt-dev=1.1.38-r0 \
-  py3-pip=23.1.2-r0 \
-  py3-setuptools=67.7.2-r0 \
-  py3-wheel=0.40.0-r1 \
+  libxml2-dev=2.11.8-r0 \
+  libxslt-dev=1.1.39-r0 \
+  py3-pip=23.3.1-r0 \
+  py3-setuptools=70.3.0-r0 \
+  py3-wheel=0.42.0-r0 \
   python3-dev=3.11.11-r0 \
   python3=3.11.11-r0
 
@@ -92,10 +92,10 @@ ENV CISA_HOME="/home/${CISA_USER}"
 ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 RUN apk --no-cache add \
-  ca-certificates=20240226-r0 \
-  chromium=119.0.6045.159-r0 \
-  libxml2=2.11.7-r00 \
-  libxslt=1.1.38-r0
+  ca-certificates=20241121-r1 \
+  chromium=124.0.6367.78-r0 \
+  libxml2=2.11.8-r0 \
+  libxslt=1.1.39-r0
 
 # Create unprivileged user
 RUN addgroup --system --gid ${CISA_GID} ${CISA_GROUP} \
