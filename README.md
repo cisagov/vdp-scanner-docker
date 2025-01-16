@@ -23,7 +23,7 @@ Python library. Then it will output CSVs with agency and domain level results.
 To run the `cisagov/vdp-scanner` image via Docker:
 
 ```console
-docker run cisagov/vdp-scanner:0.2.0-dev.4
+docker run cisagov/vdp-scanner:0.2.0-dev.5
 ```
 
 ### Running with Docker Compose ###
@@ -36,7 +36,7 @@ docker run cisagov/vdp-scanner:0.2.0-dev.4
 
     services:
       vdp-scanner:
-        image: 'cisagov/vdp-scanner:0.2.0-dev.4'
+        image: cisagov/vdp-scanner:0.2.0-dev.5
         volumes:
           - .:/task/host_mount
     ```
@@ -74,20 +74,50 @@ docker run cisagov/vdp-scanner:0.2.0-dev.4
 1. Pull the new image:
 
     ```console
-    docker pull cisagov/vdp-scanner:0.2.0-dev.4
+    docker pull cisagov/vdp-scanner:0.2.0-dev.5
     ```
 
 1. Recreate and run the container by following the [previous instructions](#running-with-docker).
 
+## Updating Python dependencies ##
+
+This image uses [Pipenv] to manage Python dependencies using a [Pipfile](https://github.com/pypa/pipfile).
+Both updating dependencies and changing the [Pipenv] configuration in `src/Pipfile`
+will result in a modified `src/Pipfile.lock` file that should be committed to the
+repository.
+
+> [!WARNING]
+> The `src/Pipfile.lock` as generated will fail `pre-commit` checks due to JSON formatting.
+
+### Updating dependencies ###
+
+If you want to update existing dependencies you would run the following command
+in the `src/` subdirectory:
+
+```console
+pipenv lock
+```
+
+### Modifying dependencies ###
+
+If you want to add or remove dependencies you would update the `src/Pipfile` file
+and then update dependencies as you would above.
+
+> [!NOTE]
+> You should only specify packages that are explicitly needed for your Docker
+> configuration. Allow [Pipenv] to manage the dependencies of the specified
+> packages.
+
 ## Image tags ##
 
-The images of this container are tagged with
-[semantic versions](https://semver.org).  It is recommended that most users use
-a version tag (e.g. `:0.2.0-dev.4`).
+The images of this container are tagged with [semantic
+versions](https://semver.org) of the underlying example project that they
+containerize.  It is recommended that most users use a version tag (e.g.
+`:0.2.0-dev.5`).
 
 | Image:tag | Description |
 |-----------|-------------|
-|`cisagov/vdp-scanner:0.2.0-dev.4`| An exact release version. |
+|`cisagov/vdp-scanner:0.2.0-dev.5`| An exact release version. |
 |`cisagov/vdp-scanner:0.2`| The most recent release matching the major and minor version numbers. |
 |`cisagov/vdp-scanner:0`| The most recent release matching the major version number. |
 |`cisagov/vdp-scanner:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
@@ -153,7 +183,7 @@ Build the image locally using this git repository as the [build context](https:/
 
 ```console
 docker build \
-  --tag cisagov/vdp-scanner:0.2.0-dev.4 \
+  --tag cisagov/vdp-scanner:0.2.0-dev.5 \
   https://github.com/cisagov/vdp-scanner-docker.git#develop
 ```
 
@@ -184,7 +214,7 @@ Docker:
       --file Dockerfile-x \
       --platform linux/amd64 \
       --output type=docker \
-      --tag cisagov/vdp-scanner:0.2.0-dev.4 .
+      --tag cisagov/vdp-scanner:0.2.0-dev.5 .
     ```
 
 ## Contributing ##
@@ -204,3 +234,5 @@ dedication](https://creativecommons.org/publicdomain/zero/1.0/).
 All contributions to this project will be released under the CC0
 dedication. By submitting a pull request, you are agreeing to comply
 with this waiver of copyright interest.
+
+[Pipenv]: https://pypi.org/project/pipenv/

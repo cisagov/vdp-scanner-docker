@@ -1,4 +1,4 @@
 --requirement requirements-test.txt
 ipython
 pipenv
-semver
+semver>=3
