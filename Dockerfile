@@ -6,7 +6,7 @@
 # in the Python Docker image we use for the build-stage. The tag of the Python
 # Docker image matches the version of the python3 package available on Alpine
 # for consistency.
-FROM docker.io/library/alpine:3.19 AS compile-stage
+FROM docker.io/library/alpine:3.21 AS compile-stage
 
 ###
 # Unprivileged user variables
@@ -16,18 +16,18 @@ ENV CISA_HOME="/home/${CISA_USER}"
 ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 # Versions of the Python packages installed directly
-ENV PYTHON_PIP_VERSION=24.0
-ENV PYTHON_PIPENV_VERSION=2023.12.1
-ENV PYTHON_SETUPTOOLS_VERSION=69.2.0
-ENV PYTHON_WHEEL_VERSION=0.43.0
+ENV PYTHON_PIP_VERSION=24.3.1
+ENV PYTHON_PIPENV_VERSION=2024.4.0
+ENV PYTHON_SETUPTOOLS_VERSION=75.8.0
+ENV PYTHON_WHEEL_VERSION=0.45.1
 
 RUN apk --no-cache add \
-  py3-lxml=4.9.3-r1 \
-  py3-pip=23.3.1-r0 \
+  py3-lxml=5.3.0-r0 \
+  py3-pip=24.3.1-r0 \
   py3-setuptools=70.3.0-r0 \
-  py3-wheel=0.42.0-r0 \
-  python3-dev=3.11.11-r0 \
-  python3=3.11.11-r0
+  py3-wheel=0.43.0-r0 \
+  python3-dev=3.12.8-r1 \
+  python3=3.12.8-r1
 
 ###
 # Create a Python virtual environment (venv) for setup (due to PEP 668); install the
@@ -70,7 +70,7 @@ RUN pipenv check --verbose \
 
 # The version of Python used here should match the version of the Alpine
 # python3 package installed in the compile-stage.
-FROM docker.io/library/python:3.11.11-alpine3.19 AS build-stage
+FROM docker.io/library/python:3.12.8-alpine3.21 AS build-stage
 
 ###
 # For a list of pre-defined annotation keys and value types see:
@@ -93,8 +93,8 @@ ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 RUN apk --no-cache add \
   ca-certificates=20241121-r1 \
-  chromium=124.0.6367.78-r0 \
-  py3-lxml=4.9.3-r1
+  chromium=131.0.6778.264-r0 \
+  py3-lxml=5.3.0-r0
 
 # Create unprivileged user
 RUN addgroup --system --gid ${CISA_GID} ${CISA_GROUP} \
