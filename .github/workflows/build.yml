@@ -425,7 +425,7 @@ jobs:
           context: .
           file: ./Dockerfile-x
           labels: ${{ needs.prepare.outputs.labels }}
-          # These are the only three platforms that Alpine Linux 3.19 offers the
+          # These are the only three platforms that Alpine Linux 3.21 offers the
           # chromium package for at this time.
           platforms: |
             linux/amd64
