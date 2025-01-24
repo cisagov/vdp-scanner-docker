@@ -93,7 +93,7 @@ ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 RUN apk --no-cache add \
   ca-certificates=20241121-r1 \
-  chromium=131.0.6778.264-r0 \
+  chromium=132.0.6834.83-r0 \
   py3-lxml=5.3.0-r0
 
 # Create unprivileged user
