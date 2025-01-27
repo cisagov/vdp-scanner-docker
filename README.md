@@ -23,7 +23,7 @@ Python library. Then it will output CSVs with agency and domain level results.
 To run the `cisagov/vdp-scanner` image via Docker:
 
 ```console
-docker run cisagov/vdp-scanner:0.2.0-dev.6
+docker run cisagov/vdp-scanner:0.2.0-dev.7
 ```
 
 ### Running with Docker Compose ###
@@ -36,7 +36,7 @@ docker run cisagov/vdp-scanner:0.2.0-dev.6
 
     services:
       vdp-scanner:
-        image: cisagov/vdp-scanner:0.2.0-dev.6
+        image: cisagov/vdp-scanner:0.2.0-dev.7
         volumes:
           - .:/task/host_mount
     ```
@@ -74,7 +74,7 @@ docker run cisagov/vdp-scanner:0.2.0-dev.6
 1. Pull the new image:
 
     ```console
-    docker pull cisagov/vdp-scanner:0.2.0-dev.6
+    docker pull cisagov/vdp-scanner:0.2.0-dev.7
     ```
 
 1. Recreate and run the container by following the [previous instructions](#running-with-docker).
@@ -113,11 +113,11 @@ and then update dependencies as you would above.
 The images of this container are tagged with [semantic
 versions](https://semver.org) of the underlying example project that they
 containerize.  It is recommended that most users use a version tag (e.g.
-`:0.2.0-dev.6`).
+`:0.2.0-dev.7`).
 
 | Image:tag | Description |
 |-----------|-------------|
-|`cisagov/vdp-scanner:0.2.0-dev.6`| An exact release version. |
+|`cisagov/vdp-scanner:0.2.0-dev.7`| An exact release version. |
 |`cisagov/vdp-scanner:0.2`| The most recent release matching the major and minor version numbers. |
 |`cisagov/vdp-scanner:0`| The most recent release matching the major version number. |
 |`cisagov/vdp-scanner:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
@@ -183,7 +183,7 @@ Build the image locally using this git repository as the [build context](https:/
 
 ```console
 docker build \
-  --tag cisagov/vdp-scanner:0.2.0-dev.6 \
+  --tag cisagov/vdp-scanner:0.2.0-dev.7 \
   https://github.com/cisagov/vdp-scanner-docker.git#develop
 ```
 
@@ -214,7 +214,7 @@ Docker:
       --file Dockerfile-x \
       --platform linux/amd64 \
       --output type=docker \
-      --tag cisagov/vdp-scanner:0.2.0-dev.6 .
+      --tag cisagov/vdp-scanner:0.2.0-dev.7 .
     ```
 
 ## Contributing ##
