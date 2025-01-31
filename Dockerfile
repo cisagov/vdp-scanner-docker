@@ -16,8 +16,8 @@ ENV CISA_HOME="/home/${CISA_USER}"
 ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 # Versions of the Python packages installed directly
-ENV PYTHON_PIP_VERSION=24.3.1
-ENV PYTHON_PIPENV_VERSION=2024.4.0
+ENV PYTHON_PIP_VERSION=25.0
+ENV PYTHON_PIPENV_VERSION=2024.4.1
 ENV PYTHON_SETUPTOOLS_VERSION=75.8.0
 ENV PYTHON_WHEEL_VERSION=0.45.1
 
@@ -93,7 +93,7 @@ ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 RUN apk --no-cache add \
   ca-certificates=20241121-r1 \
-  chromium=131.0.6778.264-r0 \
+  chromium=132.0.6834.83-r0 \
   py3-lxml=5.3.0-r0
 
 # Create unprivileged user

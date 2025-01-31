@@ -33,11 +33,11 @@
     },
     "certifi": {
       "hashes": [
-        "sha256:1275f7a45be9464efc1173084eaa30f866fe2e47d389406136d332ed4967ec56",
-        "sha256:b650d30f370c2b724812bee08008be0c4163b163ddaec3f2546c1caf65f191db"
+        "sha256:3d5da6925056f6f18f119200434a4780a94263f10d1c21d032a6f6b2baa20651",
+        "sha256:ca78db4565a652026a4db2bcdf68f2fb589ea80d0be70e03929ed730746b84fe"
       ],
       "markers": "python_version >= '3.6'",
-      "version": "==2024.12.14"
+      "version": "==2025.1.31"
     },
     "charset-normalizer": {
       "hashes": [
@@ -157,11 +157,11 @@
     },
     "importlib-metadata": {
       "hashes": [
-        "sha256:45e54197d28b7a7f1559e60b95e7c567032b602131fbd588f1497f47880aa68b",
-        "sha256:71522656f0abace1d072b9e5481a48f07c138e00f079c38c8f883823f9c26bd7"
+        "sha256:02a89390c1e15fdfdc0d7c6b25cb3e62650d0494005c97d6f148bf5b9787525e",
+        "sha256:310b41d755445d74569f993ccfc22838295d9fe005425094fad953d7f15c8580"
       ],
-      "markers": "python_version >= '3.8'",
-      "version": "==8.5.0"
+      "markers": "python_version >= '3.9'",
+      "version": "==8.6.1"
     },
     "lxml": {
       "hashes": [
