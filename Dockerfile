@@ -16,7 +16,7 @@ ENV CISA_HOME="/home/${CISA_USER}"
 ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 # Versions of the Python packages installed directly
-ENV PYTHON_PIP_VERSION=25.0
+ENV PYTHON_PIP_VERSION=25.0.1
 ENV PYTHON_PIPENV_VERSION=2024.4.1
 ENV PYTHON_SETUPTOOLS_VERSION=75.8.0
 ENV PYTHON_WHEEL_VERSION=0.45.1
@@ -26,8 +26,8 @@ RUN apk --no-cache add \
   py3-pip=24.3.1-r0 \
   py3-setuptools=70.3.0-r0 \
   py3-wheel=0.43.0-r0 \
-  python3-dev=3.12.8-r1 \
-  python3=3.12.8-r1
+  python3-dev=3.12.9-r0 \
+  python3=3.12.9-r0
 
 ###
 # Create a Python virtual environment (venv) for setup (due to PEP 668); install the
@@ -70,7 +70,7 @@ RUN pipenv check --verbose \
 
 # The version of Python used here should match the version of the Alpine
 # python3 package installed in the compile-stage.
-FROM docker.io/library/python:3.12.8-alpine3.21 AS build-stage
+FROM docker.io/library/python:3.12.9-alpine3.21 AS build-stage
 
 ###
 # For a list of pre-defined annotation keys and value types see:
