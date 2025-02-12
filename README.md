@@ -32,7 +32,7 @@ docker run cisagov/vdp-scanner:0.2.0-dev.8
 
     ```yaml
     ---
-    name: skeleton-docker
+    name: vdp-scanner
 
     services:
       vdp-scanner:
