@@ -1,7 +1,7 @@
 ---
-version: "3.7"
-
 # This Docker composition file is used to build and test the container
+
+name: skeleton-docker
 
 services:
   vdp-scanner:
@@ -17,7 +17,7 @@ services:
 
   vdp-scanner-version:
     # Run the container to collect version information
+    command: --version
     image: cisagov/vdp-scanner
     init: true
     restart: "no"
-    command: --version

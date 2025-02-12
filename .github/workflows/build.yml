@@ -414,8 +414,6 @@ jobs:
           path: ${{ env.BUILDX_CACHE_DIR }}
           restore-keys: |
             ${{ env.BASE_CACHE_KEY }}
-      - name: Create cross-platform support Dockerfile-x
-        run: ./buildx-dockerfile.sh
       - name: Build and push platform images to registries
         id: docker_build
         uses: docker/build-push-action@v6
@@ -423,7 +421,7 @@ jobs:
           cache-from: type=local,src=${{ env.BUILDX_CACHE_DIR }}
           cache-to: type=local,dest=${{ env.BUILDX_CACHE_DIR }}
           context: .
-          file: ./Dockerfile-x
+          file: ./Dockerfile
           labels: ${{ needs.prepare.outputs.labels }}
           # These are the only three platforms that Alpine Linux 3.21 offers the
           # chromium package for at this time.
@@ -440,11 +438,15 @@ jobs:
           tags: ${{ needs.prepare.outputs.tags }}
           # For a list of pre-defined annotation keys and value types see:
           # https://github.com/opencontainers/image-spec/blob/master/annotations.md
-      - name: Publish README.md to Docker Hub
-        env:
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        run: ./push_readme.sh
+      - if: ${{ github.ref_name == 'develop' && github.event_name == 'push' }}
+        name: Update the Docker Hub description
+        uses: peter-evans/dockerhub-description@v4
+        with:
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          readme-filepath: README.md
+          repository: ${{ env.IMAGE_NAME }}
+          short-description: ${{ github.event.repository.description }}
+          username: ${{ secrets.DOCKER_USERNAME }}
       - name: Setup tmate debug session
         uses: mxschmitt/action-tmate@v3
         if: env.RUN_TMATE
