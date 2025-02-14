@@ -29,6 +29,7 @@ from collections import defaultdict
 import csv
 from datetime import datetime
 import logging
+from os.path import exists as path_exists
 from os.path import join as path_join
 from typing import Any, Dict, List, NamedTuple, Optional, Tuple
 from urllib.parse import urlparse, urlunparse
@@ -273,6 +274,14 @@ def main():
     logging.basicConfig(
         format="%(asctime)-15s %(levelname)s %(message)s", level=log_level
     )
+
+    # Before continuing make sure that our input and output directories exist
+    if not path_exists(args["--input-dir"]):
+        logging.error("Input directory '%s' does not exist.", args["--input-dir"])
+        return 1
+    if not path_exists(args["--output-dir"]):
+        logging.error("Output directory '%s' does not exist.", args["--output-dir"])
+        return 1
 
     # If we make a call to UrlHasher.hash_url() with verify=False, it will output
     # a warning. Since this is a fallback mechanism, we can squelch these warnings.
