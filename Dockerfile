@@ -70,7 +70,7 @@ RUN pipenv check --verbose \
 
 # The version of Python used here should match the version of the Alpine
 # python3 package installed in the compile-stage.
-FROM docker.io/library/python:3.12.9-alpine3.21 AS build-stage
+FROM docker.io/library/python:3.13.3-alpine3.21 AS build-stage
 
 ###
 # For a list of pre-defined annotation keys and value types see:
