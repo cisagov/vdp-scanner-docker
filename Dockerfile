@@ -6,7 +6,7 @@
 # in the Python Docker image we use for the build-stage. The tag of the Python
 # Docker image matches the version of the python3 package available on Alpine
 # for consistency.
-FROM docker.io/library/alpine:3.21 AS compile-stage
+FROM docker.io/library/alpine:3.22 AS compile-stage
 
 ###
 # Unprivileged user variables
