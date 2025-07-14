@@ -5,6 +5,7 @@ import os
 
 # Third-Party Libraries
 import pytest
+from semver import parse_version_info
 
 RELEASE_TAG = os.getenv("RELEASE_TAG")
 VERSION_FILE = "src/version.txt"
@@ -32,9 +33,9 @@ def test_log_version(dockerc, project_version, version_container):
     """Verify the container outputs the correct version to the logs."""
     # make sure container exited if running test isolated
     dockerc.wait(version_container.id)
-    log_output = version_container.logs().strip()
-    assert (
-        log_output == project_version
+    log_version = parse_version_info(version_container.logs().strip())
+    assert log_version == parse_version_info(
+        project_version
     ), f"Container version output to log does not match project version file {VERSION_FILE}"
 
 

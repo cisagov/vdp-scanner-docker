@@ -16,9 +16,9 @@ ENV CISA_HOME="/home/${CISA_USER}"
 ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 # Versions of the Python packages installed directly
-ENV PYTHON_PIP_VERSION=25.0.1
-ENV PYTHON_PIPENV_VERSION=2024.4.1
-ENV PYTHON_SETUPTOOLS_VERSION=75.8.0
+ENV PYTHON_PIP_VERSION=25.1.1
+ENV PYTHON_PIPENV_VERSION=2025.0.3
+ENV PYTHON_SETUPTOOLS_VERSION=80.9.0
 ENV PYTHON_WHEEL_VERSION=0.45.1
 
 RUN apk --no-cache add \
@@ -65,8 +65,7 @@ RUN python3 -m venv --system-site-packages /usr/local \
 ###
 WORKDIR /tmp
 COPY src/Pipfile src/Pipfile.lock ./
-RUN pipenv check --verbose \
-    && pipenv install --clear --deploy --extra-pip-args "--no-cache-dir" --verbose
+RUN pipenv install --clear --deploy --extra-pip-args "--no-cache-dir" --verbose
 
 # The version of Python used here should match the version of the Alpine
 # python3 package installed in the compile-stage.

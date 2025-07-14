@@ -2,7 +2,6 @@
 
 [![GitHub Build Status](https://github.com/cisagov/vdp-scanner-docker/workflows/build/badge.svg)](https://github.com/cisagov/vdp-scanner-docker/actions/workflows/build.yml)
 [![CodeQL](https://github.com/cisagov/vdp-scanner-docker/workflows/CodeQL/badge.svg)](https://github.com/cisagov/vdp-scanner-docker/actions/workflows/codeql-analysis.yml)
-[![Known Vulnerabilities](https://snyk.io/test/github/cisagov/vdp-scanner-docker/badge.svg)](https://snyk.io/test/github/cisagov/vdp-scanner-docker)
 
 ## Docker Image ##
 
