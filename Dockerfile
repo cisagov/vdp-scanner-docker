@@ -6,7 +6,7 @@
 # in the Python Docker image we use for the build-stage. The tag of the Python
 # Docker image matches the version of the python3 package available on Alpine
 # for consistency.
-FROM docker.io/library/alpine:3.21 AS compile-stage
+FROM docker.io/library/alpine:3.22 AS compile-stage
 
 ###
 # Unprivileged user variables
@@ -22,12 +22,12 @@ ENV PYTHON_SETUPTOOLS_VERSION=80.9.0
 ENV PYTHON_WHEEL_VERSION=0.45.1
 
 RUN apk --no-cache add \
-  py3-lxml=5.3.0-r0 \
-  py3-pip=24.3.1-r0 \
-  py3-setuptools=70.3.0-r0 \
-  py3-wheel=0.43.0-r0 \
-  python3-dev=3.12.9-r0 \
-  python3=3.12.9-r0
+  py3-lxml=5.3.1-r3 \
+  py3-pip=25.1.1-r0 \
+  py3-setuptools=80.9.0-r0 \
+  py3-wheel=0.46.1-r0 \
+  python3-dev=3.12.11-r0 \
+  python3=3.12.11-r0
 
 ###
 # Create a Python virtual environment (venv) for setup (due to PEP 668); install the
@@ -69,7 +69,7 @@ RUN pipenv install --clear --deploy --extra-pip-args "--no-cache-dir" --verbose
 
 # The version of Python used here should match the version of the Alpine
 # python3 package installed in the compile-stage.
-FROM docker.io/library/python:3.12.9-alpine3.21 AS build-stage
+FROM docker.io/library/python:3.12.11-alpine3.22 AS build-stage
 
 ###
 # For a list of pre-defined annotation keys and value types see:
@@ -91,9 +91,9 @@ ENV CISA_HOME="/home/${CISA_USER}"
 ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 RUN apk --no-cache add \
-  ca-certificates=20241121-r1 \
-  chromium=132.0.6834.83-r0 \
-  py3-lxml=5.3.0-r0
+  ca-certificates=20241121-r2 \
+  chromium=138.0.7204.93-r0 \
+  py3-lxml=5.3.1-r3
 
 # Create unprivileged user
 RUN addgroup --system --gid ${CISA_GID} ${CISA_GROUP} \
