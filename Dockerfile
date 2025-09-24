@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # We use an Alpine base image in the compile-stage because of the build
 # requirements for some of the Python requirements. When the python3-dev
 # package is installed it will also install the python3 package which leaves us
@@ -7,6 +8,11 @@
 # Docker image matches the version of the python3 package available on Alpine
 # for consistency.
 FROM docker.io/library/alpine:3.22 AS compile-stage
+=======
+# Official Docker images are in the form library/<app> while non-official
+# images are in the form <user>/<app>.
+FROM docker.io/library/python:3.13.7-alpine3.22 AS compile-stage
+>>>>>>> 7da4b0d561c4888571dd9bf161dcadfc42110edf
 
 ###
 # Unprivileged user variables
@@ -67,9 +73,15 @@ WORKDIR /tmp
 COPY src/Pipfile src/Pipfile.lock ./
 RUN pipenv install --clear --deploy --extra-pip-args "--no-cache-dir" --verbose
 
+<<<<<<< HEAD
 # The version of Python used here should match the version of the Alpine
 # python3 package installed in the compile-stage.
 FROM docker.io/library/python:3.12.11-alpine3.22 AS build-stage
+=======
+# Official Docker images are in the form library/<app> while non-official
+# images are in the form <user>/<app>.
+FROM docker.io/library/python:3.13.7-alpine3.22 AS build-stage
+>>>>>>> 7da4b0d561c4888571dd9bf161dcadfc42110edf
 
 ###
 # For a list of pre-defined annotation keys and value types see:
