@@ -134,5 +134,12 @@ COPY --chown=${CISA_USER}:${CISA_GROUP} src/version.txt src/vdp_scanner.py ./
 # Prepare to run
 ###
 USER ${CISA_USER}:${CISA_GROUP}
+<<<<<<< HEAD
 ENTRYPOINT ["python3", "vdp_scanner.py"]
 CMD ["github"]
+=======
+EXPOSE 8080/tcp
+VOLUME ["/var/log"]
+ENTRYPOINT ["example"]
+CMD ["--log-level", "DEBUG", "8", "2"]
+>>>>>>> 2186042ec0ad445b8f25e7ca44108450f84b49f6
