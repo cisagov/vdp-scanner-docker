@@ -1,7 +1,13 @@
 # vdp-scanner-docker 🔍📄 #
 
+<<<<<<< HEAD
 [![GitHub Build Status](https://github.com/cisagov/vdp-scanner-docker/workflows/build/badge.svg)](https://github.com/cisagov/vdp-scanner-docker/actions/workflows/build.yml)
 [![CodeQL](https://github.com/cisagov/vdp-scanner-docker/workflows/CodeQL/badge.svg)](https://github.com/cisagov/vdp-scanner-docker/actions/workflows/codeql-analysis.yml)
+=======
+[![GitHub Build Status](https://github.com/cisagov/skeleton-docker/workflows/build/badge.svg)](https://github.com/cisagov/skeleton-docker/actions/workflows/build.yml)
+[![License](https://img.shields.io/github/license/cisagov/skeleton-docker)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/skeleton-docker/workflows/CodeQL/badge.svg)](https://github.com/cisagov/skeleton-docker/actions/workflows/codeql-analysis.yml)
+>>>>>>> 18f4516ccbf2bed919ab3ad206443bed01103ee5
 
 ## Docker Image ##
 

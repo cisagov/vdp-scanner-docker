@@ -11,8 +11,12 @@ FROM docker.io/library/alpine:3.22 AS compile-stage
 =======
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
+<<<<<<< HEAD
 FROM docker.io/library/python:3.13.7-alpine3.22 AS compile-stage
 >>>>>>> 7da4b0d561c4888571dd9bf161dcadfc42110edf
+=======
+FROM docker.io/library/python:3.14.2-alpine3.22 AS compile-stage
+>>>>>>> 18f4516ccbf2bed919ab3ad206443bed01103ee5
 
 ###
 # Unprivileged user variables
@@ -80,8 +84,12 @@ FROM docker.io/library/python:3.12.11-alpine3.22 AS build-stage
 =======
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
+<<<<<<< HEAD
 FROM docker.io/library/python:3.13.7-alpine3.22 AS build-stage
 >>>>>>> 7da4b0d561c4888571dd9bf161dcadfc42110edf
+=======
+FROM docker.io/library/python:3.14.2-alpine3.22 AS build-stage
+>>>>>>> 18f4516ccbf2bed919ab3ad206443bed01103ee5
 
 ###
 # For a list of pre-defined annotation keys and value types see:
@@ -89,7 +97,17 @@ FROM docker.io/library/python:3.13.7-alpine3.22 AS build-stage
 #
 # Note: Additional labels are added by the build workflow.
 ###
+<<<<<<< HEAD
 LABEL org.opencontainers.image.authors="vm-fusion-dev-group@trio.dhs.gov"
+=======
+# github@cisa.dhs.gov is a very generic email distribution, and it is
+# unlikely that anyone on that distribution is familiar with the
+# particulars of your repository.  It is therefore *strongly*
+# suggested that you use an email address here that is specific to the
+# person or group that maintains this repository; for example:
+# LABEL org.opencontainers.image.authors="vm-dev@gwe.cisa.dhs.gov"
+LABEL org.opencontainers.image.authors="github@cisa.dhs.gov"
+>>>>>>> 18f4516ccbf2bed919ab3ad206443bed01103ee5
 LABEL org.opencontainers.image.vendor="Cybersecurity and Infrastructure Security Agency"
 
 ###
