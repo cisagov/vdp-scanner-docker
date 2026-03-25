@@ -13,4 +13,8 @@ requests = "*"
 urllib3 = "*"
 
 [requires]
+<<<<<<< HEAD
 python_full_version = "3.12.11"
+=======
+python_full_version = "3.14.3"
+>>>>>>> cdd0eb7c54a6982e1cac5e92cb7f61d7d74c97e0

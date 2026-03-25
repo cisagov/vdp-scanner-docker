@@ -12,11 +12,15 @@ FROM docker.io/library/alpine:3.22 AS compile-stage
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
 <<<<<<< HEAD
+<<<<<<< HEAD
 FROM docker.io/library/python:3.13.7-alpine3.22 AS compile-stage
 >>>>>>> 7da4b0d561c4888571dd9bf161dcadfc42110edf
 =======
 FROM docker.io/library/python:3.14.2-alpine3.22 AS compile-stage
 >>>>>>> 18f4516ccbf2bed919ab3ad206443bed01103ee5
+=======
+FROM docker.io/library/python:3.14.3-alpine3.23 AS compile-stage
+>>>>>>> cdd0eb7c54a6982e1cac5e92cb7f61d7d74c97e0
 
 ###
 # Unprivileged user variables
@@ -26,10 +30,9 @@ ENV CISA_HOME="/home/${CISA_USER}"
 ENV VIRTUAL_ENV="${CISA_HOME}/.venv"
 
 # Versions of the Python packages installed directly
-ENV PYTHON_PIP_VERSION=25.1.1
-ENV PYTHON_PIPENV_VERSION=2025.0.3
-ENV PYTHON_SETUPTOOLS_VERSION=80.9.0
-ENV PYTHON_WHEEL_VERSION=0.45.1
+ENV PYTHON_PIP_VERSION=26.0.1
+ENV PYTHON_PIPENV_VERSION=2026.0.3
+ENV PYTHON_SETUPTOOLS_VERSION=82.0.0
 
 RUN apk --no-cache add \
   py3-lxml=5.3.1-r3 \
@@ -40,11 +43,18 @@ RUN apk --no-cache add \
   python3=3.12.11-r0
 
 ###
+<<<<<<< HEAD
 # Create a Python virtual environment (venv) for setup (due to PEP 668); install the
 # specified versions of pip, setuptools, and wheel into the setup venv; install the
 # specified version of pipenv into the setup venv; create the image dependency venv;
 # and install the specified versions of pip, setuptools, and wheel into the dependency
 # venv.
+=======
+# Install the specified versions of pip and setuptools into the system
+# Python environment; install the specified version of pipenv into the system Python
+# environment; set up a Python virtual environment (venv); and install the specified
+# versions of pip and setuptools into the venv.
+>>>>>>> cdd0eb7c54a6982e1cac5e92cb7f61d7d74c97e0
 #
 # Note that we use the --no-cache-dir flag to avoid writing to a local
 # cache.  This results in a smaller final image, at the cost of
@@ -55,16 +65,19 @@ RUN python3 -m venv --system-site-packages /usr/local \
     && /usr/local/bin/python3 -m pip install --no-cache-dir --upgrade \
         pip==${PYTHON_PIP_VERSION} \
         setuptools==${PYTHON_SETUPTOOLS_VERSION} \
+<<<<<<< HEAD
         wheel==${PYTHON_WHEEL_VERSION} \
     && /usr/local/bin/python3 -m pip install --no-cache-dir --upgrade \
+=======
+    && python3 -m pip install --no-cache-dir --upgrade \
+>>>>>>> cdd0eb7c54a6982e1cac5e92cb7f61d7d74c97e0
         pipenv==${PYTHON_PIPENV_VERSION} \
     # Manually create the virtual environment
     && python3 -m venv --system-site-packages ${VIRTUAL_ENV} \
     # Ensure the core Python packages are installed in the virtual environment
     && ${VIRTUAL_ENV}/bin/python3 -m pip install --no-cache-dir --upgrade \
         pip==${PYTHON_PIP_VERSION} \
-        setuptools==${PYTHON_SETUPTOOLS_VERSION} \
-        wheel==${PYTHON_WHEEL_VERSION}
+        setuptools==${PYTHON_SETUPTOOLS_VERSION}
 
 ###
 # Check the Pipfile configuration and then install the Python dependencies into
@@ -85,11 +98,15 @@ FROM docker.io/library/python:3.12.11-alpine3.22 AS build-stage
 # Official Docker images are in the form library/<app> while non-official
 # images are in the form <user>/<app>.
 <<<<<<< HEAD
+<<<<<<< HEAD
 FROM docker.io/library/python:3.13.7-alpine3.22 AS build-stage
 >>>>>>> 7da4b0d561c4888571dd9bf161dcadfc42110edf
 =======
 FROM docker.io/library/python:3.14.2-alpine3.22 AS build-stage
 >>>>>>> 18f4516ccbf2bed919ab3ad206443bed01103ee5
+=======
+FROM docker.io/library/python:3.14.3-alpine3.23 AS build-stage
+>>>>>>> cdd0eb7c54a6982e1cac5e92cb7f61d7d74c97e0
 
 ###
 # For a list of pre-defined annotation keys and value types see:
