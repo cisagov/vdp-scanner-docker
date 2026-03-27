@@ -19,6 +19,42 @@ def test_container_count(dockerc):
     ), "Wrong number of containers were started."
 
 
+<<<<<<< HEAD
+=======
+def test_wait_for_ready(main_container):
+    """Wait for container to be ready."""
+    timeout = 10
+    for _i in range(timeout):
+        if READY_MESSAGE in main_container.logs():
+            break
+        time.sleep(1)
+    else:
+        raise Exception(
+            f"Container does not seem ready.  "
+            f'Expected "{READY_MESSAGE}" in the log within {timeout} seconds.'
+        )
+
+
+def test_wait_for_exits(dockerc, main_container, version_container):
+    """Wait for containers to exit."""
+    assert (
+        dockerc.wait(main_container.id) == 0
+    ), "Container service (main) did not exit cleanly"
+    assert (
+        dockerc.wait(version_container.id) == 0
+    ), "Container service (version) did not exit cleanly"
+
+
+def test_output(dockerc, main_container):
+    """Verify the container had the correct output."""
+    # make sure container exited if running test isolated
+    dockerc.wait(main_container.id)
+    log_output = main_container.logs()
+    assert DIVISION_MESSAGE in log_output, "Division message not found in log output."
+    assert SECRET_QUOTE in log_output, "Secret not found in log output."
+
+
+>>>>>>> 51d33e84ab06d5393058339e15f2f425ea0585db
 @pytest.mark.skipif(
     RELEASE_TAG in [None, ""], reason="this is not a release (RELEASE_TAG not set)"
 )
@@ -34,9 +70,10 @@ def test_log_version(dockerc, project_version, version_container):
     # make sure container exited if running test isolated
     dockerc.wait(version_container.id)
     log_version = semver.version.Version.parse(version_container.logs().strip())
-    assert log_version == semver.version.Version.parse(
-        project_version
-    ), f"Container version output to log does not match project version file {VERSION_FILE}"
+    assert log_version == semver.version.Version.parse(project_version), (
+        "Container version output to log does not match project version file "
+        f"{VERSION_FILE}"
+    )
 
 
 @pytest.mark.skipif(
