@@ -1,8 +1,13 @@
 # vdp-scanner-docker 🔍📄 #
 
+<<<<<<< HEAD
 [![GitHub Build Status](https://github.com/cisagov/vdp-scanner-docker/workflows/build/badge.svg)](https://github.com/cisagov/vdp-scanner-docker/actions/workflows/build.yml)
 [![CodeQL](https://github.com/cisagov/vdp-scanner-docker/workflows/CodeQL/badge.svg)](https://github.com/cisagov/vdp-scanner-docker/actions/workflows/codeql-analysis.yml)
-[![Known Vulnerabilities](https://snyk.io/test/github/cisagov/vdp-scanner-docker/badge.svg)](https://snyk.io/test/github/cisagov/vdp-scanner-docker)
+=======
+[![GitHub Build Status](https://github.com/cisagov/skeleton-docker/workflows/build/badge.svg)](https://github.com/cisagov/skeleton-docker/actions/workflows/build.yml)
+[![License](https://img.shields.io/github/license/cisagov/skeleton-docker)](https://spdx.org/licenses/)
+[![CodeQL](https://github.com/cisagov/skeleton-docker/workflows/CodeQL/badge.svg)](https://github.com/cisagov/skeleton-docker/actions/workflows/codeql-analysis.yml)
+>>>>>>> 18f4516ccbf2bed919ab3ad206443bed01103ee5
 
 ## Docker Image ##
 
@@ -23,7 +28,7 @@ Python library. Then it will output CSVs with agency and domain level results.
 To run the `cisagov/vdp-scanner` image via Docker:
 
 ```console
-docker run cisagov/vdp-scanner:0.2.0-dev.8
+docker run cisagov/vdp-scanner:0.2.0-dev.9
 ```
 
 ### Running with Docker Compose ###
@@ -36,7 +41,7 @@ docker run cisagov/vdp-scanner:0.2.0-dev.8
 
     services:
       vdp-scanner:
-        image: cisagov/vdp-scanner:0.2.0-dev.8
+        image: cisagov/vdp-scanner:0.2.0-dev.9
         volumes:
           - .:/task/host_mount
     ```
@@ -74,7 +79,7 @@ docker run cisagov/vdp-scanner:0.2.0-dev.8
 1. Pull the new image:
 
     ```console
-    docker pull cisagov/vdp-scanner:0.2.0-dev.8
+    docker pull cisagov/vdp-scanner:0.2.0-dev.9
     ```
 
 1. Recreate and run the container by following the [previous instructions](#running-with-docker).
@@ -85,9 +90,6 @@ This image uses [Pipenv] to manage Python dependencies using a [Pipfile](https:/
 Both updating dependencies and changing the [Pipenv] configuration in `src/Pipfile`
 will result in a modified `src/Pipfile.lock` file that should be committed to the
 repository.
-
-> [!WARNING]
-> The `src/Pipfile.lock` as generated will fail `pre-commit` checks due to JSON formatting.
 
 ### Updating dependencies ###
 
@@ -113,25 +115,41 @@ and then update dependencies as you would above.
 The images of this container are tagged with [semantic
 versions](https://semver.org) of the underlying example project that they
 containerize.  It is recommended that most users use a version tag (e.g.
-`:0.2.0-dev.8`).
+`:0.2.0-dev.9`).
 
 | Image:tag | Description |
+<<<<<<< HEAD
 |-----------|-------------|
-|`cisagov/vdp-scanner:0.2.0-dev.8`| An exact release version. |
+|`cisagov/vdp-scanner:0.2.0-dev.9`| An exact release version. |
 |`cisagov/vdp-scanner:0.2`| The most recent release matching the major and minor version numbers. |
 |`cisagov/vdp-scanner:0`| The most recent release matching the major version number. |
 |`cisagov/vdp-scanner:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
 |`cisagov/vdp-scanner:nightly` | A nightly build of the `develop` branch of this repository. |
 |`cisagov/vdp-scanner:latest`| The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
+=======
+| --------- | ----------- |
+| `cisagov/example:0.2.2+build.1` | An exact release version. |
+| `cisagov/example:0.2` | The most recent release matching the major and minor version numbers. |
+| `cisagov/example:0` | The most recent release matching the major version number. |
+| `cisagov/example:edge` | The most recent image built from a merge into the `develop` branch of this repository. |
+| `cisagov/example:nightly` | A nightly build of the `develop` branch of this repository. |
+| `cisagov/example:latest` | The most recent release image pushed to a container registry.  Pulling an image using the `:latest` tag [should be avoided.](https://vsupalov.com/docker-latest-tag/) |
+>>>>>>> cdd0eb7c54a6982e1cac5e92cb7f61d7d74c97e0
 
 See the [tags tab](https://hub.docker.com/r/cisagov/vdp-scanner/tags) on Docker
 Hub for a list of all the supported tags.
 
 ## Volumes ##
 
+<<<<<<< HEAD
 | Mount point | Purpose |
 |-------------|---------|
 | `/task/host_mount`  | Output directory.  |
+=======
+| Mount point | Purpose        |
+| ----------- | -------------- |
+| `/var/log`  |  Log storage   |
+>>>>>>> cdd0eb7c54a6982e1cac5e92cb7f61d7d74c97e0
 
 ## Ports ##
 
@@ -140,10 +158,19 @@ There are no exposed ports.
 <!--
 The following ports are exposed by this container:
 
+<<<<<<< HEAD
 | Port | Purpose        |
 |------|----------------|
 | Port Number | Describe its purpose. |
 -->
+=======
+| Port | Purpose |
+| ---- | ------- |
+| 8080 | Example only; nothing is actually listening on the port |
+
+The sample [Docker composition](compose.yml) publishes the
+exposed port at 8080.
+>>>>>>> cdd0eb7c54a6982e1cac5e92cb7f61d7d74c97e0
 
 ## Environment variables ##
 
@@ -153,12 +180,13 @@ There are no required environment variables.
 
 <!--
 | Name  | Purpose | Default |
-|-------|---------|---------|
+| ----- | ------- | ------- |
 | `REQUIRED_VARIABLE` | Describe its purpose. | `null` |
 -->
 
 ### Optional ###
 
+<<<<<<< HEAD
 There are no optional environment variables.
 
 <!--
@@ -176,6 +204,17 @@ There are no secrets.
 |--------------|---------|
 | `filename.ext` | Describe its purpose. |
 -->
+=======
+| Name | Purpose | Default |
+| ---- | ------- | ------- |
+| `ECHO_MESSAGE` | Sets the message echoed by this container. | `Hello World from Dockerfile` |
+
+## Secrets ##
+
+| Filename | Purpose |
+| -------- | ------- |
+| `quote.txt` | Replaces the secret stored in the example library's package data. |
+>>>>>>> cdd0eb7c54a6982e1cac5e92cb7f61d7d74c97e0
 
 ## Building from source ##
 
@@ -183,7 +222,7 @@ Build the image locally using this git repository as the [build context](https:/
 
 ```console
 docker build \
-  --tag cisagov/vdp-scanner:0.2.0-dev.8 \
+  --tag cisagov/vdp-scanner:0.2.0-dev.9 \
   https://github.com/cisagov/vdp-scanner-docker.git#develop
 ```
 
@@ -214,7 +253,7 @@ Docker:
       --file Dockerfile-x \
       --platform linux/amd64 \
       --output type=docker \
-      --tag cisagov/vdp-scanner:0.2.0-dev.8 .
+      --tag cisagov/vdp-scanner:0.2.0-dev.9 .
     ```
 
 ## Contributing ##
